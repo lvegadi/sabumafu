@@ -7,7 +7,7 @@ class Entidad_reguladora(models.Model):
     telefono = models.CharField(max_length=20)
     correo = models.EmailField(max_length=60)
 
-class Ong(models.Model):
+class ONG(models.Model):
     nombre = models.CharField(max_length=45)
     tipo = models.CharField(max_length=45)
     telefono = models.CharField(max_length=20)
@@ -27,5 +27,5 @@ class Entidad_municipio(models.Model):
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)
 
 class ONG_municipio(models.Model):
-    ong = models.ForeignKey(Ong, on_delete=models.CASCADE, null=True, blank=True)
+    ong = models.ForeignKey(ONG, on_delete=models.CASCADE, null=True, blank=True)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)    

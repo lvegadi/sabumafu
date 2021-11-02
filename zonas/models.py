@@ -11,7 +11,7 @@ class Zona_protegida(models.Model):
 
 class Alerta(models.Model):
     tipo_alerta = models.CharField(max_length=30)
-    usuario_id = models.DecimalField(max_digits=10)
+    usuario_id = models.DecimalField(max_digits=10, decimal_places=0)
     fecha = models.DateField()
     zona = models.ForeignKey(Zona_protegida, on_delete=models.CASCADE, blank=True, null=True)
     
@@ -26,13 +26,13 @@ class Flora(models.Model):
     descripcion = models.CharField(max_length=200)
 
 class Fauna_zona(models.Model):
-    poblacion = models.DecimalField(max_digits=10)
+    poblacion = models.DecimalField(max_digits=10, decimal_places=0)
     observaciones = models.CharField(max_length=200)
     fauna = models.ForeignKey(Fauna, on_delete=models.CASCADE, null=True, blank=True)
     zona = models.ForeignKey(Zona_protegida, on_delete=models.CASCADE, null=True, blank=True)
 
 class Flora_zona(models.Model):
-    poblacion = models.DecimalField(max_digits=10)
+    poblacion = models.DecimalField(max_digits=10, decimal_places=0)
     observaciones = models.CharField(max_length=200)
     fauna = models.ForeignKey(Fauna, on_delete=models.CASCADE, null=True, blank=True)
     zona = models.ForeignKey(Zona_protegida, on_delete=models.CASCADE, null=True, blank=True)
