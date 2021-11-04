@@ -3,78 +3,90 @@
 <html>
 
 <head>
-    <!-- META -->
-    <meta charse="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- META -->
+  <meta charse="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}'>
-    <title>Sabumafu</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}'>
+  <link href='{% static "css/carousel.css" %}' rel="stylesheet">
+  <link href='{% static "css/headers.css" %}' rel="stylesheet">
+  <title>{% block title %} {% endblock %}</title>
+
 </head>
 
 <body>
-
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Fixed navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Zonas protegidas
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="#">Todas las zonas</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Flora</a></li>
-                      <li><a class="dropdown-item" href="#">Fauna</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Acerca de nosotros</a>
-                  </li>
-                </ul>
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-              </div>
-            </div>
-          </nav>
-    </header>
-
+  <!-- Header -->
+  <header class="p-4 mb-4 bg-dark fixed-top text-white">
     <div class="container">
-        {% block contenido %}
-        {% endblock%}
-    </div>
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+            <use xlink:href="#bootstrap" />
+          </svg>
+        </a>
 
-    <footer class="footer mt-auto py-3 bg-light">
-        <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-secondary">Inicio</a></li>
+          <li><div class="dropdown text-end">
+            <a href="#" class="nav-link px-2 d-block link-dark text-decoration-none dropdown-toggle text-white" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+             Zonas
+            </a>
+            <ul class="dropdown-menu text-medium" aria-labelledby="dropdown1">
+              <li><a class="dropdown-item" href="#">Todas las zonas</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Flora</a></li>
+              <li><a class="dropdown-item" href="#">Fauna</a></li>
+            </ul>
+          </div></li>
+          <li><a href="#" class="nav-link px-2 text-white">Alertas</a></li>
+          <li><div class="dropdown text-end">
+            <a href="#" class="nav-link px-2 d-block link-dark text-decoration-none dropdown-toggle text-white" id="dropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+             Municipios
+            </a>
+            <ul class="dropdown-menu text-medium" aria-labelledby="dropdown2">
+              <li><a class="dropdown-item" href="#">Lista de municipios</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Entidades gubernamentales</a></li>
+              <li><a class="dropdown-item" href="#">ONGs</a></li>
+            </ul>
+          </div></li>
+          <li><a href="#" class="nav-link px-2 text-white">Acerca de</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-outline-light me-2">Login</button>
+          <button type="button" class="btn btn-warning">Sign-up</button>
         </div>
-    </footer>
+      </div>
+    </div>
+  </header>
 
-    <!-- SCRIPTS -->
-    <script src='{% static "js/jquery-3.6.0.min.js" %}'></script>
-    <script src='{% static "js/bootstrap.min.js" %}'></script>
+  <!-- Contenido -->
+
+  {% block contenido %}
+  {% endblock%}
+
+  <!-- Footer -->
+  <footer class="text-muted py-5">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+      </p>
+      <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+      <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
+          href="/docs/5.0/getting-started/introduction/">getting started guide</a>.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src='{% static "js/jquery-3.6.0.min.js" %}'></script>
+  <script src='{% static "js/bootstrap.min.js" %}'></script>
+  <script src='{% static "js/bootstrap.bundle.min.js" %}'></script>
 </body>
 
 
