@@ -16,9 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from zonas.views import index
+from zonas.views import index, zona, todazona
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index,),
+    path('', index, name="index"),
+     path('index/', index, name="index"),
+    path('zonas/<int:id>', zona, name="zona_id"),
+    path('zonas/', todazona, name="zona"),
 ]

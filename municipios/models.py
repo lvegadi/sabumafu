@@ -15,7 +15,6 @@ class ONG(models.Model):
 
 class Departamento(models.Model):
     nombre = models.CharField(max_length=45)
-    codigo = models.CharField(max_length=20)
 
 class Municipio(models.Model):
     nombre = models.CharField(max_length=45)

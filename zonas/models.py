@@ -4,11 +4,13 @@ from municipios.models import Municipio
 # Create your models here.
 class Zona_protegida(models.Model):
     nombre = models.CharField(max_length=45)
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.CharField(max_length=2000)
+    caracteristicas = models.CharField(max_length=10000)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)
-    coordenada_x = models.DecimalField(max_digits=20, decimal_places=10)
-    coordenada_y = models.DecimalField(max_digits=20, decimal_places=10)
+    latitud = models.DecimalField(max_digits=20, decimal_places=10)
+    longitud = models.DecimalField(max_digits=20, decimal_places=10)
     geojson_url = models.CharField(max_length=60)
+    image_url = models.CharField(max_length=60)
 
 class Alerta(models.Model):
     tipo_alerta = models.CharField(max_length=30)
