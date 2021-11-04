@@ -1,5 +1,6 @@
 from django.db import models
 from municipios.models import Municipio
+
 # Create your models here.
 class Zona_protegida(models.Model):
     nombre = models.CharField(max_length=45)
@@ -36,3 +37,13 @@ class Flora_zona(models.Model):
     observaciones = models.CharField(max_length=200)
     fauna = models.ForeignKey(Fauna, on_delete=models.CASCADE, null=True, blank=True)
     zona = models.ForeignKey(Zona_protegida, on_delete=models.CASCADE, null=True, blank=True)
+    
+class Fauna_poblacion(models.Model):
+    poblacion_historica = models.DecimalField(max_digits=10, decimal_places=0)
+    fecha = models.DateField()
+    fauna = models.ForeignKey(Fauna_zona, on_delete=models.CASCADE, null=True, blank=True)
+
+class Flora_poblacion(models.Model):
+    poblacion_historica = models.DecimalField(max_digits=10, decimal_places=0)
+    fecha = models.DateField()
+    flora = models.ForeignKey(Flora_zona, on_delete=models.CASCADE, null=True, blank=True)    
