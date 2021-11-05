@@ -8,6 +8,10 @@ def index(request):
     data = {'title': 'sabumafu'}
     return render(request,'zonas/index.html',data)
 
+def ingreso(request):
+    data = {'title': 'sabumafu'}
+    return render(request,'ingreso/index.html',data)
+
 def zona(request,id):
     myzona = Zona_protegida.objects.filter(id=id).first()
     data = {'title' : myzona.nombre, 'zona' : myzona}
