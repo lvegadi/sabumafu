@@ -1,5 +1,6 @@
 {% extends 'home.html' %}
 {% block contenido %}
+{% load static %}
 
 <main>
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -11,44 +12,33 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="#777" />
-                </svg>
+                <img src='{% static "images/caño_cristales.jpg" %}' width="100%" height="100%" preserveAspectRatio="xMidYMid slice" >
 
                 <div class="container">
                     <div class="carousel-caption text-start">
-                        <h1>Example headline.</h1>
+                        <h1>Caño Cristales</h1>
                         <p>Some representative placeholder content for the first slide of the carousel.</p>
                         <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="#777" />
-                </svg>
-
+                <img src='{% static "images/tayrona_1.jpg" %}' width="100%" height="100%" preserveAspectRatio="xMidYMid slice" >
                 <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
+                    <div class="carousel-caption text-end">
+                        <h1>Parque Nacional Tayrona</h1>
                         <p>Some representative placeholder content for the second slide of the carousel.</p>
                         <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="#777" />
-                </svg>
-
+                <img src='{% static "images/cocora.jpg" %}' width="100%" height="100%" preserveAspectRatio="xMidYMid slice" >
                 <div class="container">
                     <div class="carousel-caption text-end">
-                        <h1>One more for good measure.</h1>
+                        <h1>Valle del Cocora</h1>
                         <p>Some representative placeholder content for the third slide of this carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
                     </div>
                 </div>
             </div>
@@ -73,47 +63,29 @@
         <!-- Three columns of text below the carousel -->
         <div class="row">
             <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
-                    preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                        dy=".3em">140x140</text>
-                </svg>
-
-                <h2>Heading</h2>
+                <img src='{% static "images/loro.jpg" %}' class="shadow-lg  rounded-circle" alt="ico" width="180" height="180">
+                <br> <br>
+                <h2>Fauna</h2>
                 <p>Some representative placeholder content for the three columns of text below the carousel. This is the
                     first column.</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
+                <p><a class="btn btn-secondary" href="#">Más información &raquo;</a></p>
+            </div>
             <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
-                    preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                        dy=".3em">140x140</text>
-                </svg>
-
-                <h2>Heading</h2>
+                <img src='{% static "images/ong.png" %}' class=" shadow-lg rounded-circle" alt="ico" width="180" height="180">
+                <br> <br>
+                <h2>ONG</h2>
                 <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second
                     column.</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
+                <p><a class="btn btn-secondary" href="#">Más información &raquo;</a></p>
+            </div>
             <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140"
-                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140"
-                    preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777"
-                        dy=".3em">140x140</text>
-                </svg>
-
-                <h2>Heading</h2>
+                <img src='{% static "images/rio.jpg" %}' class=" shadow-lg rounded-circle" alt="ico" width="180" height="180">
+                <br> <br>
+                <h2>Flora</h2>
                 <p>And lastly this, the third column of representative placeholder content.</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+                <p><a class="btn btn-secondary" href="#">Más información &raquo;</a></p>
+            </div>
+        </div>
 
 
         <!-- START THE FEATURETTES -->
