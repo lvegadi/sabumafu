@@ -5,10 +5,10 @@
     <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
       <div class="col-md-6 px-0">
         <h1 class="display-4 fst-italic">{{zona.nombre}}</h1>
-        <p class="lead my-3" id='descripcion'>{{zona.descripcion}}</p>
+        <p class="lead my-3" style="transform: rotate(0);" id='descripcion'>{{zona.descripcion}}</p>
       </div>
     </div>
-  
+    <!-- Flora y fauna cards -->
     <div class="row mb-2">
       <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -42,17 +42,19 @@
       </div>
     </div>
   
+    <!-- Contenido -->
     <div class="row g-5">
       <div class="col-md-8">
         <h3 class="pb-4 mb-4 fst-italic border-bottom">
-          From the Firehose
+          {{zona.nombre}}
         </h3>
-  
+        <div style="max-width:850px;">
+           <img src='{% static "images/" %}{{zona.image_url}}' alt='{{zona.nombre}}' width='100%' height='auto'>
+      </div>      
+       
         <article class="blog-post">
-          <h2 class="blog-post-title">Sample blog post</h2>
-          <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p>
-  
-          <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
+          <h2 class="blog-post-title">Generalidades</h2>
+          <P>{{zona.caracteristicas | linebreaks}}</p>
           <hr>
           <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
           <h2>Blockquotes</h2>

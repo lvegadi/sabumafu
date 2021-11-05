@@ -4,8 +4,8 @@ from municipios.models import Municipio
 # Create your models here.
 class Zona_protegida(models.Model):
     nombre = models.CharField(max_length=45)
-    descripcion = models.CharField(max_length=2000)
-    caracteristicas = models.CharField(max_length=10000)
+    descripcion = models.TextField()
+    caracteristicas = models.TextField()
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)
     latitud = models.DecimalField(max_digits=20, decimal_places=10)
     longitud = models.DecimalField(max_digits=20, decimal_places=10)
@@ -30,13 +30,13 @@ class Flora(models.Model):
 
 class Fauna_zona(models.Model):
     poblacion = models.DecimalField(max_digits=10, decimal_places=0)
-    observaciones = models.CharField(max_length=200)
+    observaciones = models.TextField()
     fauna = models.ForeignKey(Fauna, on_delete=models.CASCADE, null=True, blank=True)
     zona = models.ForeignKey(Zona_protegida, on_delete=models.CASCADE, null=True, blank=True)
 
 class Flora_zona(models.Model):
     poblacion = models.DecimalField(max_digits=10, decimal_places=0)
-    observaciones = models.CharField(max_length=200)
+    observaciones = models.TextField()
     fauna = models.ForeignKey(Fauna, on_delete=models.CASCADE, null=True, blank=True)
     zona = models.ForeignKey(Zona_protegida, on_delete=models.CASCADE, null=True, blank=True)
     
