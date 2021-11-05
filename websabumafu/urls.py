@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('index/', index, name="index"),
-    path('zonas/<int:id>', zona, name="zona_id"),
-    path('zonas/', todazona, name="zona"),
+    path('zonas/<slug:slug>', zona, name="zona_detalles"),
+    path('zonas/', todazona, name="zona_lista"),
     path('ingreso/',ingreso,name="loging"),
 ]

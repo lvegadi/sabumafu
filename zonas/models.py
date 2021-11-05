@@ -1,5 +1,8 @@
 from django.db import models
+from django.db.models.signals import pre_save, post_save
 from municipios.models import Municipio
+
+from .utils import slugify_instance_title
 
 # Create your models here.
 class Zona_protegida(models.Model):
@@ -11,6 +14,13 @@ class Zona_protegida(models.Model):
     longitud = models.DecimalField(max_digits=20, decimal_places=10)
     geojson_url = models.CharField(max_length=60)
     image_url = models.CharField(max_length=60)
+    slug = models.SlugField(unique=True,blank=True, null=True)
+
+    #def save(self, *args, **kwargs):
+    #    if self.slug is None:
+    #         self.slug = slugify(self.nombre)
+    #    super().save(*args, **kwargs)
+
 
 class Alerta(models.Model):
     tipo_alerta = models.CharField(max_length=30)
@@ -49,3 +59,17 @@ class Flora_poblacion(models.Model):
     poblacion_historica = models.DecimalField(max_digits=10, decimal_places=0)
     fecha = models.DateField()
     flora = models.ForeignKey(Flora_zona, on_delete=models.CASCADE, null=True, blank=True)    
+
+def zona_pre_save(sender, instance, *args, **kwargs):
+    print('pre_save')
+    if instance.slug is None:
+        slugify_instance_title(instance, save=False)
+
+pre_save.connect(zona_pre_save, sender=Zona_protegida)
+
+def zona_post_save(sender, instance, created, *args, **kwargs):
+    print('post_save')
+    if created:
+       slugify_instance_title(instance,save=True)
+
+post_save.connect(zona_pre_save, sender=Zona_protegida)
