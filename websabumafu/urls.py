@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from zonas.views import index, zona, todazona,ingreso
+from zonas.views import index, zona, todazona,ingreso, registro
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
     path('zonas/<slug:slug>', zona, name="zona_detalles"),
     path('zonas/', todazona, name="zona_lista"),
     path('ingreso/',ingreso,name="loging"),
+    path('ingreso/registro/',registro,name="signup"),
 
 ]

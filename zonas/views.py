@@ -12,10 +12,15 @@ def ingreso(request):
     data = {'title': 'sabumafu'}
     return render(request,'ingreso/index.html',data)
 
+def registro(request):
+    data = {'title': 'sabumafu'}
+    return render(request,'ingreso/registro.html',data)
+
+
 def zona(request,slug=None):
     if slug is not None:
         try:
-           myzona = Zona_protegida.objects.get(slug=slug) 
+            myzona = Zona_protegida.objects.get(slug=slug) 
         except Zona_protegida.DoesNotExist:
             raise Http404
         except:
