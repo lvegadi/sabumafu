@@ -1,10 +1,11 @@
 {% extends 'home.html' %}
 {% load static %}
 {% block header%}
-  <!-- Mapbox API CSS -->
-  
-  <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css' rel='stylesheet' />
-  <link rel="stylesheet" type="text/css" href="{% static 'css/mapa.css' %}" >
+  <!-- Mapbox API-->
+
+<link href="{% static 'css/mapa.css'%}" rel='stylesheet'>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
 
 {% endblock %}
 
@@ -255,12 +256,19 @@
       </div>
     </div>
   </div>
-
+  <div id='map' style='width: 850px; height: 478px;'></div>
 </main>
 
 <script type="text/javascript" src='{% static "js/zona.js" %}'></script>
 
 <!-- Mapbox API Js -->
+<script> 
+var latitud = parseFloat("{{zona.latitud}}".replace(',','.'));
+var longitud =  parseFloat("{{zona.longitud}}".replace(',','.'));
+console.log("Latitud:"+latitud+" Longitud:"+longitud)
+console.log("latitud original:{{zona.latitud}}");
+</script>
 <script type="text/javascript" src='{% static "js/mapa.js" %}'></script>
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js'></script>
+
+
 {% endblock %}
