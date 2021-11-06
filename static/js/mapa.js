@@ -5,5 +5,8 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/outdoors-v11',
     center : [longitud,latitud],
     zoom: 9.3,
-})    
+})
+
+const nav = new mapboxgl.NavigationControl();
+map.addControl(nav);
 
