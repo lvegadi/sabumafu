@@ -1,6 +1,12 @@
 {% extends 'home.html' %}
-{% block contenido %}
 {% load static %}
+
+{% block header %}
+<link href='{% static "css/carousel.css" %}' rel="stylesheet">
+{% endblock %}
+
+{% block contenido %}
+
 
 <main>
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
