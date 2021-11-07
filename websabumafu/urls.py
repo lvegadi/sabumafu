@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from zonas.views import index, zona, todazona,ingreso, registro
+from zonas.views import index, zona, todazona,ingreso, registro, flora, todaflora
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,8 @@ urlpatterns = [
     path('zonas/', todazona, name="zona_lista"),
     path('ingreso/',ingreso,name="loging"),
     path('ingreso/registro/',registro,name="signup"),
+    path('zonas/flora/<int:id>',flora,name="flora"),
+    path('zonas/flora/',todaflora,name="flora_lista"),
+
 
 ]

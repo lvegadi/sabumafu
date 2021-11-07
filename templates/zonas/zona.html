@@ -23,12 +23,11 @@
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">World</strong>
-          <h3 class="mb-0">Featured post</h3>
-          <div class="mb-1 text-muted">Nov 12</div>
-          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to
-            additional content.</p>
-          <a href="#" class="stretched-link">Continue reading</a>
+          <strong class="d-inline-block mb-2 text-primary">Fauna</strong>
+          <h3 class="mb-0">{{flora.flora.nombre}}</h3>
+          <div class="mb-1 text-muted">Población: {{flora.poblacion}} ejemplar(es)</div>
+          <p class="card-text mb-auto">{{flora.observaciones}}</p>
+         <!--<a href="/zonas/flora/{{flora.zona.id}}" class="stretched-link">Continue reading</a> --> 
         </div>
         <div class="col-auto d-none d-lg-block">
           <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -44,7 +43,7 @@
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success">Design</strong>
+          <strong class="d-inline-block mb-2 text-success">Flora</strong>
           <h3 class="mb-0">Post title</h3>
           <div class="mb-1 text-muted">Nov 11</div>
           <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.
@@ -58,7 +57,6 @@
             <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
               dy=".3em">Thumbnail</text>
           </svg>
-
         </div>
       </div>
     </div>
@@ -80,7 +78,7 @@
         <hr>
         <h2>Localizacion geografica</h2>
         <p>{{zona.nombre}} se encuentra en el siguiente mapa:</p>
-        <div id='map' style='width: 850px; height: 478px;'></div>
+        <div id='map' style='width: 50vw; height: 50vh;'></div>
         <p>{{zona.latitud}} {{zona.longitud}}</p>
         <blockquote class="blockquote">
           <p>Quoted text goes here.</p>

@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block header%}
+{% endblock %}
+
+{% block contenido %}
+    <br><br><br><br>
+    {% for row in flora %}
+        <div class="card">
+            <div class="card-body">
+                {{row.flora.nombre}}
+            </div>
+        </div>
+
+
+    {% endfor%}
+
+
+{% endblock %}
