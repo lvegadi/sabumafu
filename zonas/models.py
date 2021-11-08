@@ -39,7 +39,8 @@ class Fauna(models.Model):
     nombre = models.CharField(max_length=45)
     especie = models.CharField(max_length=45)
     descripcion = models.CharField(max_length=200)
-
+    def __str__(self):
+        return self.nombre + " " + self.especie
 
 class Flora(models.Model):
     nombre = models.CharField(max_length=45)
@@ -57,6 +58,9 @@ class Fauna_zona(models.Model):
         Fauna, on_delete=models.CASCADE, null=True, blank=True)
     zona = models.ForeignKey(
         Zona_protegida, on_delete=models.CASCADE, null=True, blank=True)
+    def __str__(self):
+        return self.fauna.nombre + " en " + self.zona.nombre
+
 
 
 class Flora_zona(models.Model):

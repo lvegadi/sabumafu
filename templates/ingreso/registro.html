@@ -20,34 +20,46 @@
 </head>
 
 <body class="text-center">
-    <div class="card w-25 my-5 mx-auto ">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="notification {{ messages.tags }}">{{ messages }}</div>
+        {% endfor %}
+    {% endif %}
+    <div class="card my-5 mx-auto" style="width: 30vw;">
         <div class="card-body">
             <form id="reg_form" method="post" name="reg_form">
                 {% csrf_token %}
                 <img src='{% static "images/logo.ico" %}' alt="ico" width="80" height="80">
                 <h1 class="h3 mb-3 fw-normal">Registro al sistema</h1>
+
+
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="reg_name" name="reg_name" placeholder="Nombre">
+                    <input type="text" class="form-control" id="reg_name" name="{{data.first_name.name}}" placeholder="Nombre">
                     <label for="reg_name">Nombre</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="reg_lastname" name="reg_lastname" placeholder="Apellido">
+                    <input type="text" class="form-control" id="reg_lastname" name="{{data.last_name.name}}" placeholder="Apellido">
                     <label for="reg_lastname">apellido</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="reg_id" name="reg_id" placeholder="Identificación">
+                    <input type="text" class="form-control" id="reg_id" name="{{data.username.name}}" placeholder="Identificación">
                     <label for="reg_id">Identificación</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="reg_email" name="reg_email" placeholder="name@example.com">
+                    <input type="email" class="form-control" id="reg_email" name="{{data.email.name}}" placeholder="name@example.com">
                     <label for="floatingIreg_emailnput">Correo</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="reg_password" name="reg_password" placeholder="Constraseña">
+                    <input type="password" class="form-control" id="reg_password" name="{{data.password1.name}}" placeholder="Constraseña">
+                    <label for="reg_password">Constraseña</label>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="reg_password" name="{{data.password2.name}}" placeholder="Constraseña">
                     <label for="reg_password">Constraseña</label>
                 </div>
                 <br>

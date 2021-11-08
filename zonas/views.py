@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import Http404
 # Importar modelos
-from zonas.models import Zona_protegida, Flora_zona, Fauna_zona
+from zonas.models import Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
+from zonas.forms import UserRegister
+from django.contrib import messages
 
 # Create your views here.
 
@@ -17,7 +19,15 @@ def ingreso(request):
 
 
 def registro(request):
-    data = {'title': 'sabumafu'}
+    if request.method == 'POST':
+        form = UserRegister(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            messages.success(request,f'Usuario {username} creado')
+    else:
+            form = UserRegister()
+    data = {'data' : form}
     return render(request, 'ingreso/registro.html', data)
 
 
@@ -52,7 +62,7 @@ def flora(request, id=None):
     return render(request, 'zonas/flora.html', data)
 
 def todaflora(request):
-    lista = Flora_zona.objects.all()
+    lista = Flora.objects.all()
     count = lista.count()
     data = {'title': 'Flora', 'count': count, 'flora': lista}
     return render(request, 'zonas/flora.html', data)
@@ -69,7 +79,7 @@ def fauna(request, id=None):
     return render(request, 'zonas/fauna.html', data)
 
 def todafauna(request):
-    lista = Fauna_zona.objects.all()
+    lista = Fauna.objects.all()
     count = lista.count()
     data = {'title': 'Fauna', 'count': count, 'fauna': lista}
     return render(request, 'zonas/fauna.html', data)

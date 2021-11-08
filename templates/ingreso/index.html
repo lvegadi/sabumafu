@@ -18,7 +18,9 @@
 <!-- Custom styles for this template -->
 <link href="signin.css" rel="stylesheet">
 </head>
-
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
 <body class="text-center">
   <div class="card w-25 my-5 mx-auto ">
     <div class="card-body">
@@ -29,6 +31,7 @@
         <div class="form-floating">
           <input type="text" class="form-control" id="ing_id" name="ing_id" placeholder="1234567890" min="0">
           <label for="ing_id">Identificación</label>
+          
         </div>
         <br>
         <div class="form-floating">
