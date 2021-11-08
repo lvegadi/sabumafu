@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 # Importar modelos
-from zonas.models import Zona_protegida, Flora_zona
+from zonas.models import Zona_protegida, Flora_zona, Fauna_zona
 
 # Create your views here.
 
@@ -29,7 +29,7 @@ def zona(request, slug=None):
             raise Http404
         except:
             raise Http404
-    data = {'title': myzona.nombre, 'zona': myzona} #, 'flora': flora}
+    data = {'title': myzona.nombre, 'zona': myzona , 'flora': myzona.id}
     return render(request, 'zonas/zona.html', data)
 
 
@@ -56,3 +56,20 @@ def todaflora(request):
     count = lista.count()
     data = {'title': 'Flora', 'count': count, 'flora': lista}
     return render(request, 'zonas/flora.html', data)
+
+def fauna(request, id=None):
+    if id is not None:
+        try:
+            fauna = Fauna_zona.objects.filter(zona=id)
+        except Fauna_zona.DoesNotExist:
+            raise Http404
+        except:
+            raise Http404
+    data = {'fauna': fauna}
+    return render(request, 'zonas/fauna.html', data)
+
+def todafauna(request):
+    lista = Fauna_zona.objects.all()
+    count = lista.count()
+    data = {'title': 'Fauna', 'count': count, 'fauna': lista}
+    return render(request, 'zonas/fauna.html', data)

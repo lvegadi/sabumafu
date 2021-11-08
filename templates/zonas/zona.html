@@ -1,7 +1,7 @@
 {% extends 'home.html' %}
 {% load static %}
 {% block header%}
-  <!-- Mapbox API-->
+<!-- Mapbox API-->
 
 <link href="{% static 'css/mapa.css'%}" rel='stylesheet'>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
@@ -27,7 +27,7 @@
           <h3 class="mb-0">{{flora.flora.nombre}}</h3>
           <div class="mb-1 text-muted">Población: {{flora.poblacion}} ejemplar(es)</div>
           <p class="card-text mb-auto">{{flora.observaciones}}</p>
-         <!--<a href="/zonas/flora/{{flora.zona.id}}" class="stretched-link">Continue reading</a> --> 
+          <a href="/zonas/flora/{{flora}}" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block">
           <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -258,9 +258,9 @@
 <script type="text/javascript" src='{% static "js/zona.js" %}'></script>
 
 <!-- Mapbox API Js -->
-<script> 
-var latitud = parseFloat("{{zona.latitud}}".replace(',','.'));
-var longitud =  parseFloat("{{zona.longitud}}".replace(',','.'));
+<script>
+  var latitud = parseFloat("{{zona.latitud}}".replace(',', '.'));
+  var longitud = parseFloat("{{zona.longitud}}".replace(',', '.'));
 </script>
 <script type="text/javascript" src='{% static "js/mapa.js" %}'></script>
 
