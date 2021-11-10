@@ -4,6 +4,7 @@ from django.http import Http404
 from zonas.models import Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
 from zonas.forms import UserRegister
 from django.contrib import messages
+import os
 
 # Create your views here.
 
@@ -40,6 +41,7 @@ def zona(request, slug=None):
         except:
             raise Http404
     data = {'title': myzona.nombre, 'zona': myzona , 'flora': myzona.id}
+    
     return render(request, 'zonas/zona.html', data)
 
 
