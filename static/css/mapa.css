@@ -1,4 +1,4 @@
-.map {
-    
+#map {
+    max-width:100%;max-height:auto;
     width: 850px; height: 478px;
 }

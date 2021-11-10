@@ -21,7 +21,7 @@
         {% for zona in lista %}
         <div class="col">
           <div class="card shadow-sm" style="height:75vh">
-            <img class="card-img-top" src='{% static "images/" %}{{zona.image_url}}' alt='{{zona.nombre}}' width='100%'
+            <img class="card-img-top" src='{{zona.image.url}}' alt='{{zona.nombre}}' width='100%'
               height='auto'>
             <div class="card-body">
               <h3 class="card-text">{{zona.nombre}}</h3>

@@ -69,7 +69,7 @@
         {{zona.nombre}}
       </h3>
       <div style="max-width:850px;">
-        <img src='{% static "images/" %}{{zona.image_url}}' alt='{{zona.nombre}}' width='100%' height='auto'>
+        <img src='{{zona.image.url}}' alt='{{zona.nombre}}' width='100%' height='auto'>
       </div>
 
       <article class="blog-post">
@@ -78,7 +78,7 @@
         <hr>
         <h2>Localizacion geografica</h2>
         <p>{{zona.nombre}} se encuentra en el siguiente mapa:</p>
-        <div id='map' style='width: 50vw; height: 50vh;'></div>
+        <div id='map'></div>
         <p>{{zona.latitud}} {{zona.longitud}}</p>
         <blockquote class="blockquote">
           <p>Quoted text goes here.</p>
@@ -261,6 +261,7 @@
 <script>
   var latitud = parseFloat("{{zona.latitud}}".replace(',', '.'));
   var longitud = parseFloat("{{zona.longitud}}".replace(',', '.'));
+  var geojson = "{{zona.geojson.url}}"
 </script>
 <script type="text/javascript" src='{% static "js/mapa.js" %}'></script>
 

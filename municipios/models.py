@@ -1,11 +1,20 @@
 from django.db import models
+import pathlib
+import uuid
 
 # Create your models here.
+
+def image_upload_handler(instance, filename):
+    fpath = pathlib.Path(filename)
+    new_fname = str(uuid.uuid1())
+    path = instance.__class__.__name__
+    return f"images/{path}/{new_fname}{fpath.suffix}"
 
 class Entidad_reguladora(models.Model):
     nombre = models.CharField(max_length=45)
     telefono = models.CharField(max_length=20)
     correo = models.EmailField(max_length=60)
+    image = models.ImageField(upload_to=image_upload_handler, blank=True, null=True)
     def __str__(self):
         return self.nombre;
 
@@ -14,6 +23,7 @@ class ONG(models.Model):
     tipo = models.CharField(max_length=45)
     telefono = models.CharField(max_length=20)
     correo = models.EmailField(max_length=60)
+    image = models.ImageField(upload_to=image_upload_handler, blank=True, null=True)
     def __str__(self):
         return self.nombre;
 

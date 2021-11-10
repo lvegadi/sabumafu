@@ -1,22 +1,33 @@
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from municipios.models import Municipio
-
 from .utils import slugify_instance_title
-
+import pathlib
+import uuid
 # Create your models here.
+
+#subir imagenes
+def image_upload_handler(instance, filename):
+    fpath = pathlib.Path(filename)
+    new_fname = str(uuid.uuid1())
+    path = instance.__class__.__name__
+    return f"images/{path}/{new_fname}{fpath.suffix}"
+
+def geojson_upload_handler(instance, filename):
+    fpath = pathlib.Path(filename)
+    new_fname = str(uuid.uuid1())
+    return f"geojson/{new_fname}{fpath.suffix}"
 
 
 class Zona_protegida(models.Model):
     nombre = models.CharField(max_length=45)
     descripcion = models.TextField()
     caracteristicas = models.TextField()
-    municipio = models.ForeignKey(
-        Municipio, on_delete=models.CASCADE, null=True, blank=True)
+    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)
     latitud = models.DecimalField(max_digits=20, decimal_places=10)
     longitud = models.DecimalField(max_digits=20, decimal_places=10)
-    geojson_url = models.CharField(max_length=60)
-    image_url = models.CharField(max_length=60)
+    geojson = models.FileField(upload_to=geojson_upload_handler, blank=True, null=True)
+    image = models.ImageField(upload_to=image_upload_handler, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
 
     # def save(self, *args, **kwargs):
@@ -29,7 +40,7 @@ class Zona_protegida(models.Model):
 
 class Alerta(models.Model):
     tipo_alerta = models.CharField(max_length=30)
-    usuario_id = models.DecimalField(max_digits=10, decimal_places=0)
+    usuario = models.DecimalField(max_digits=10, decimal_places=0)
     fecha = models.DateField()
     zona = models.ForeignKey(
         Zona_protegida, on_delete=models.CASCADE, blank=True, null=True)
@@ -38,6 +49,7 @@ class Alerta(models.Model):
 class Fauna(models.Model):
     nombre = models.CharField(max_length=45)
     especie = models.CharField(max_length=45)
+    image = models.ImageField(upload_to=image_upload_handler, blank=True, null=True)
     descripcion = models.CharField(max_length=200)
     def __str__(self):
         return self.nombre + " " + self.especie
@@ -45,6 +57,7 @@ class Fauna(models.Model):
 class Flora(models.Model):
     nombre = models.CharField(max_length=45)
     especie = models.CharField(max_length=45)
+    image = models.ImageField(upload_to=image_upload_handler, blank=True, null=True)
     descripcion = models.CharField(max_length=200)
 
     def __str__(self):
@@ -101,6 +114,5 @@ def zona_post_save(sender, instance, created, *args, **kwargs):
     print('post_save')
     if created:
         slugify_instance_title(instance, save=True)
-
 
 post_save.connect(zona_pre_save, sender=Zona_protegida)
