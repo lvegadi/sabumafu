@@ -29,17 +29,18 @@
         <img src='{% static "images/logo.ico" %}' alt="ico" width="80" height="80">
         <h1 class="h3 mb-3 fw-normal">Ingreso al sistema</h1>
         <div class="form-floating">
-          <input type="text" class="form-control" id="ing_id" name="ing_id" placeholder="1234567890" min="0">
+          <input type="text" class="form-control" id="ing_id" name="username" placeholder="1234567890" min="0">
           <label for="ing_id">Identificación</label>
           
         </div>
         <br>
         <div class="form-floating">
-          <input type="password" class="form-control" id="ing_pass" name="ing_pass" placeholder="Constraseña">
+          <input type="password" class="form-control" id="ing_pass" name="password" placeholder="Constraseña">
           <label for="ing_pass">Contraseña</label>
         </div>
         <br>
-        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Ingresar</button>
+        <button class="btn btn-outline-success btn-block" type="submit">Ingresar</button>
+        <button class="btn btn-outline-danger btn-block" onclick="window.location.href='/zonas/'" >Regresar</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2018–2021</p>
       </form>
     </div>

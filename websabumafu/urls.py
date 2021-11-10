@@ -13,10 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
 from django.urls import path
-from zonas.views import index, zona, todazona,ingreso, registro, flora, todaflora, fauna, todafauna
+from zonas.views import index, zona, todazona, registro, flora, todaflora, fauna, todafauna, alerta
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,12 +27,15 @@ urlpatterns = [
     path('index/', index, name="index"),
     path('zonas/<slug:slug>', zona, name="zona_detalles"),
     path('zonas/', todazona, name="zona_lista"),
-    path('ingreso/',ingreso,name="loging"),
     path('ingreso/registro/',registro,name="signup"),
-    path('zonas/flora/<int:id>',flora,name="flora"),
-    path('zonas/flora/',todaflora,name="flora_lista"),
-    path('zonas/fauna/<int:id>',fauna,name="fauna"),
-    path('zonas/fauna/',todafauna,name="fauna_lista"),
+    path('flora/<int:id>',flora,name="flora"),
+    path('flora/',todaflora,name="flora_lista"),
+    path('fauna/<int:id>',fauna,name="fauna"),
+    path('fauna/',todafauna,name="fauna_lista"),
+    path('account/',include('django.contrib.auth.urls')),
+    path('alerta/', alerta, name="alert"),
+
+
 
 ]
 if settings.DEBUG:

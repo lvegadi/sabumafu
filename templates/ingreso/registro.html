@@ -14,10 +14,7 @@
     <link href='{% static "css/login.css" %}' rel="stylesheet">
     <title>{% block title %} {{ title }} {% endblock %}</title>
 
-</head>
-<!-- Custom styles for this template -->
-<link href="signin.css" rel="stylesheet">
-</head>
+
 
 <body class="text-center">
     {% if messages %}
@@ -34,33 +31,33 @@
 
 
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="reg_name" name="{{data.first_name.name}}" placeholder="Nombre">
+                    <input type="text" class="form-control" id="reg_name" name="{{data.first_name.name}}" placeholder="Nombre" required>
                     <label for="reg_name">Nombre</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="reg_lastname" name="{{data.last_name.name}}" placeholder="Apellido">
+                    <input type="text" class="form-control" id="reg_lastname" name="{{data.last_name.name}}" placeholder="Apellido" required>
                     <label for="reg_lastname">apellido</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="reg_id" name="{{data.username.name}}" placeholder="Identificación">
+                    <input type="text" class="form-control" id="reg_id" name="{{data.username.name}}" placeholder="Identificación" required>
                     <label for="reg_id">Identificación</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="reg_email" name="{{data.email.name}}" placeholder="name@example.com">
+                    <input type="email" class="form-control" id="reg_email" name="{{data.email.name}}" placeholder="name@example.com" required>
                     <label for="floatingIreg_emailnput">Correo</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="reg_password" name="{{data.password1.name}}" placeholder="Constraseña">
-                    <label for="reg_password">Constraseña</label>
+                    <input type="password" class="form-control" id="reg_password" name="{{data.password1.name}}" placeholder="Contraseña" required>
+                    <label for="reg_password">Contraseña</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="reg_password" name="{{data.password2.name}}" placeholder="Constraseña">
-                    <label for="reg_password">Constraseña</label>
+                    <input type="password" class="form-control" id="reg_password" name="{{data.password2.name}}" placeholder="Contraseña" required>
+                    <label for="reg_password">Contraseña</label>
                 </div>
                 <br>
                 <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrar</button>

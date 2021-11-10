@@ -4,6 +4,7 @@ from django.http import Http404
 from zonas.models import Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
 from zonas.forms import UserRegister
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -11,11 +12,6 @@ from django.contrib import messages
 def index(request):
     data = {'title': 'sabumafu'}
     return render(request, 'zonas/index.html', data)
-
-
-def ingreso(request):
-    data = {'title': 'sabumafu'}
-    return render(request, 'ingreso/index.html', data)
 
 
 def registro(request):
@@ -59,13 +55,13 @@ def flora(request, id=None):
         except:
             raise Http404
     data = {'flora': flora}
-    return render(request, 'zonas/flora.html', data)
+    return render(request, 'flora/index.html', data)
 
 def todaflora(request):
     lista = Flora.objects.all()
     count = lista.count()
     data = {'title': 'Flora', 'count': count, 'flora': lista}
-    return render(request, 'zonas/flora.html', data)
+    return render(request, 'flora/index.html', data)
 
 def fauna(request, id=None):
     if id is not None:
@@ -76,10 +72,15 @@ def fauna(request, id=None):
         except:
             raise Http404
     data = {'fauna': fauna}
-    return render(request, 'zonas/fauna.html', data)
+    return render(request, 'fauna/index.html', data)
 
 def todafauna(request):
     lista = Fauna.objects.all()
     count = lista.count()
     data = {'title': 'Fauna', 'count': count, 'fauna': lista}
-    return render(request, 'zonas/fauna.html', data)
+    return render(request, 'fauna/index.html', data)
+
+@login_required(login_url='/account/login/')
+def alerta(request):
+    data = {'title': 'sabumafu'}
+    return render(request, 'alerta/index.html', data)

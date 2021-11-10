@@ -18,19 +18,22 @@
   {% endblock %}
 </head>
 
-<body class="pb-0">
+<body class="pb-0 align-self-stretch">
   <!-- Header -->
-  <header class="p-2 bg-dark fixed-top text-white">
+  <header class="p-2 fixed-top bg-dark text-white">
     <div class="container-fluid">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        
-        <a href="/index/" class="d-block text-white text-decoration-none">
-          <img src='{% static "images/logo.ico" %}' alt="ico" width="40" height="40"> Sabumafu
-        </a>
+        <div class="">
+          <a href="/index/" class="d-block text-white text-decoration-none fs-4 ">
+            <img src='{% static "images/logo.ico" %}' alt="ico" width="40" height="40">
+            Sabumafu
+          </a>
+        </div>
+
 
         <ul class="nav col-12 col-lg-auto me-lg-auto justify-content-center mx-auto">
           <li><a href="/index/" class="nav-link px-2 text-white">Inicio</a></li>
-          
+
           <li>
             <div class="dropdown text-end">
               <a href="#" class="nav-link px-2 d-block link-dark text-decoration-none dropdown-toggle text-white"
@@ -42,14 +45,14 @@
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="/zonas/flora/">Flora</a></li>
-                <li><a class="dropdown-item" href="/zonas/fauna/">Fauna</a></li>
+                <li><a class="dropdown-item" href="/flora/">Flora</a></li>
+                <li><a class="dropdown-item" href="/fauna/">Fauna</a></li>
               </ul>
             </div>
           </li>
 
-          <li><a href="#" class="nav-link px-2 text-white">Alertas</a></li>
-          
+          <li><a href="/alerta/" class="nav-link px-2 text-white">Alertas</a></li>
+
           <li>
             <div class="dropdown text-end">
               <a href="#" class="nav-link px-2 d-block link-dark text-decoration-none dropdown-toggle text-white"
@@ -72,14 +75,37 @@
 
 
         <form class="col-4 col-lg-auto  me-lg-3">
-          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+          <input type="search" class="form-control btn-outline-light" placeholder="Search..." aria-label="Search">
         </form>
 
         <div class="text-end">
-          <a href="/ingreso/" role="button" class="btn btn-outline-light me-2">Ingreso</a>
-          <a href="/ingreso/registro/"  role="button" class="btn btn-success">Registro</a>
+          {% if user %}
+          {% if user.id != None %}
+          <div class="dropdown">
+            <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+              {{user.username}}
+            </button>
+            <ul class="dropdown-menu">
+              {% if user.is_superuser == 1%}
+                <li><a class="dropdown-item" href="/admin/">Perfil admin</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="#">Link 2</a></li>
+              <li><a class="dropdown-item" href="/account/logout">Cerrar sesión</a></li>
+            </ul>
+          </div>
+          {% endif%}
+
+          {% endif %}
+
+          {% if user.id == None %}
+
+          <a href="/account/login/" role="button" class="btn btn-outline-light me-2">Ingreso</a>
+          <a href="/ingreso/registro/" role="button" class="btn btn-success">Registro</a>
+
+          {% endif%}
         </div>
       </div>
+    </div>
     </div>
   </header>
 
