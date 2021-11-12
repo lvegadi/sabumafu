@@ -8,26 +8,23 @@ from django.contrib.auth.decorators import login_required
 import os
 
 # Create your views here.
-
-
+#editar
 def index(request):
     data = {'title': 'sabumafu'}
     return render(request, 'zonas/index.html', data)
-
-
+#sirve
 def registro(request):
     if request.method == 'POST':
         form = UserRegister(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data['username']
-            messages.success(request,f'Usuario {username} creado')
+            man = form.cleaned_data['username']
+            messages.success(request, f'El usuario: {man} ha sido creado.')
     else:
             form = UserRegister()
     data = {'data' : form}
     return render(request, 'ingreso/registro.html', data)
-
-
+#sirve
 def zona(request, slug=None):
     if slug is not None:
         try:
@@ -39,15 +36,13 @@ def zona(request, slug=None):
     data = {'title': myzona.nombre, 'zona': myzona , 'flora': myzona.id}
     
     return render(request, 'zonas/zona.html', data)
-
-
+#editar
 def todazona(request):
     lista = Zona_protegida.objects.all()
     count = lista.count()
     data = {'title': 'zonas protegidas', 'count': count, 'lista': lista}
     return render(request, 'zonas/todas.html', data)
-
-
+#sirve
 def flora(request, id=None):
     if id is not None:
         try:
@@ -57,14 +52,14 @@ def flora(request, id=None):
         except:
             raise Http404
     data = {'flora': flora}
-    return render(request, 'flora/index.html', data)
-
+    return render(request, 'flora/lista.html', data)
+#sirve
 def todaflora(request):
     lista = Flora.objects.all()
     count = lista.count()
     data = {'title': 'Flora', 'count': count, 'flora': lista}
     return render(request, 'flora/index.html', data)
-
+#sirve
 def fauna(request, id=None):
     if id is not None:
         try:
@@ -74,15 +69,15 @@ def fauna(request, id=None):
         except:
             raise Http404
     data = {'fauna': fauna}
-    return render(request, 'fauna/index.html', data)
-
+    return render(request, 'fauna/lista.html', data)
+#sirve
 def todafauna(request):
     lista = Fauna.objects.all()
     count = lista.count()
     data = {'title': 'Fauna', 'count': count, 'fauna': lista}
     return render(request, 'fauna/index.html', data)
 
-@login_required(login_url='/account/login/')
+@login_required(login_url='/account/login/') #editar
 def alerta(request):
     data = {'title': 'sabumafu'}
     return render(request, 'alerta/index.html', data)

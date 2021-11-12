@@ -24,12 +24,12 @@
                 {% for row in flora %}
                 <div class="col">
                     <div class="card shadow-sm">
-                        {% if row.image %}
-                        <img class="card-img-top" src='{{row.image.url}}' alt="{{row.nombre}}" width='100%' height='250px'>
+                        {% if row.flora.image %}
+                        <img class="card-img-top" src='{{row.flora.image.url}}' alt="{{row.flora.nombre}}" width='100%' height='250px'>
                         {% endif %}
                         <div class="card-body" style="height: 12rem;">
                             <h3 class="card-text">{{row.nombre}}</h3>
-                            <p class="card-text acortar" id="descripcion">{{row.descripcion}}</p>
+                            <p class="card-text acortar" id="descripcion">{{row.flora.descripcion}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                             </div>
                         </div>

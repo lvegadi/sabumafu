@@ -18,9 +18,11 @@
 
 <body class="text-center">
     {% if messages %}
+    <div class="alert alert-success" role="alert">
         {% for message in messages %}
-        <div class="notification {{ messages.tags }}">{{ messages }}</div>
+            <h4>{{ message }}</h4> 
         {% endfor %}
+    </div>
     {% endif %}
     <div class="card my-5 mx-auto" style="width: 30vw;">
         <div class="card-body">
@@ -28,41 +30,35 @@
                 {% csrf_token %}
                 <img src='{% static "images/logo.ico" %}' alt="ico" width="80" height="80">
                 <h1 class="h3 mb-3 fw-normal">Registro al sistema</h1>
-
-
-                <div class="form-floating">
+                <div class="form-floating py-2">
                     <input type="text" class="form-control" id="reg_name" name="{{data.first_name.name}}" placeholder="Nombre" required>
                     <label for="reg_name">Nombre</label>
                 </div>
-                <br>
-                <div class="form-floating">
+                <div class="form-floating py-2">
                     <input type="text" class="form-control" id="reg_lastname" name="{{data.last_name.name}}" placeholder="Apellido" required>
                     <label for="reg_lastname">apellido</label>
                 </div>
-                <br>
-                <div class="form-floating">
+                <div class="form-floating py-2">
                     <input type="text" class="form-control" id="reg_id" name="{{data.username.name}}" placeholder="Identificación" required>
                     <label for="reg_id">Identificación</label>
                 </div>
-                <br>
-                <div class="form-floating">
+                <div class="form-floating py-2">
                     <input type="email" class="form-control" id="reg_email" name="{{data.email.name}}" placeholder="name@example.com" required>
                     <label for="floatingIreg_emailnput">Correo</label>
                 </div>
-                <br>
-                <div class="form-floating">
+                <div class="form-floating py-2">
                     <input type="password" class="form-control" id="reg_password" name="{{data.password1.name}}" placeholder="Contraseña" required>
                     <label for="reg_password">Contraseña</label>
                 </div>
-                <br>
-                <div class="form-floating">
+                <div class="form-floating py-2">
                     <input type="password" class="form-control" id="reg_password" name="{{data.password2.name}}" placeholder="Contraseña" required>
-                    <label for="reg_password">Contraseña</label>
+                    <label for="reg_password">Verificar contraseña</label>
                 </div>
-                <br>
-                <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrar</button>
-                <p class="mt-5 mb-3 text-muted">&copy; 2018–2021</p>
+                <button class="btn btn-outline-success btn-block" type="submit">Ingresar</button>
             </form>
+            <br>
+            <button class="btn btn-outline-danger btn-block" onclick="window.location.href='/zonas/'">Regresar</button>
+            <p class="my-3 text-muted">&copy; 2018–2021</p>
         </div>
     </div>
 

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- META -->
+    <meta charse="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href='{% static "images/logo.ico" %}' />
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}'>
+    <link href='{% static "css/alert.css" %}' rel="stylesheet">
+    <title>{% block title %} {{ title }} {% endblock %}</title>
+
+</head>
+
+<body class="text-center">
+    <div class="card w-25 my-5 mx-auto ">
+        <div class="card-body">
+            <form id="alert_form" method="post" name="alert_form">
+                {% csrf_token %}
+                <img src='{% static "images/logo.ico" %}' alt="ico" width="80" height="80">
+                <h1 class="h3 mb-3 fw-normal">Creación de alertas</h1>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="ing_id" name="username" placeholder="1234567890"
+                        min="0">
+                    <label for="ing_id">Identificación</label>
+
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="ing_pass" name="password" placeholder="Constraseña">
+                    <label for="ing_pass">Contraseña</label>
+                </div>
+                <br>
+                <button class="btn btn-outline-success btn-block" type="submit">Ingresar</button>
+            </form>
+            <br>
+            <button class="btn btn-outline-danger btn-block" onclick="window.location.href='/zonas/'">Regresar</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2018–2021</p>
+        </div>
+    </div>
+
+
+    <!-- SCRIPTS -->
+    <script src='{% static "js/jquery-3.6.0.min.js" %}'></script>
+    <script src='{% static "js/bootstrap.min.js" %}'></script>
+    <script src='{% static "js/bootstrap.bundle.min.js" %}'></script>
+</body>
+
+{% block contenido %}
+{% endblock%}
+
+</html>

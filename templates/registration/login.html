@@ -18,10 +18,14 @@
 <!-- Custom styles for this template -->
 <link href="signin.css" rel="stylesheet">
 </head>
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+
+
 <body class="text-center">
+  {% if form.errors %}
+  <div class="alert alert-danger" role="alert">
+    Your username and password didn't match. Please try again.
+  </div>
+  {% endif %}
   <div class="card w-25 my-5 mx-auto ">
     <div class="card-body">
       <form id="ing_form" method="post" name="ing_form">
@@ -31,7 +35,7 @@
         <div class="form-floating">
           <input type="text" class="form-control" id="ing_id" name="username" placeholder="1234567890" min="0">
           <label for="ing_id">Identificación</label>
-          
+
         </div>
         <br>
         <div class="form-floating">
@@ -40,9 +44,11 @@
         </div>
         <br>
         <button class="btn btn-outline-success btn-block" type="submit">Ingresar</button>
-        <button class="btn btn-outline-danger btn-block" onclick="window.location.href='/zonas/'" >Regresar</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2018–2021</p>
       </form>
+      <br>
+      <button class="btn btn-outline-danger btn-block" onclick="window.location.href='/zonas/'">Regresar</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2018–2021</p>
+
     </div>
   </div>
 
