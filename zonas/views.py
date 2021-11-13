@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 # Importar modelos
-from zonas.models import Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
+from zonas.models import Alerta, Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
 from zonas.forms import UserRegister
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -11,7 +11,8 @@ from datetime import datetime
 # Create your views here.
 #editar
 def index(request):
-    data = {'title': 'Sabumafu'}
+    alert = Alerta.objects.all()
+    data = {'title': 'Sabumafu', 'alert' : alert}
     return render(request, 'zonas/index.html', data)
 #sirve
 def registro(request):
@@ -37,7 +38,7 @@ def zona(request, slug=None):
             raise Http404
         except:
             raise Http404
-    data = {'title': myzona.nombre, 'zona': myzona , 'flora': myzona.id}
+    data = {'title': myzona.nombre, 'zona': myzona , 'id': myzona.id}
     
     return render(request, 'zonas/zona.html', data)
 #editar
@@ -85,6 +86,13 @@ def todafauna(request):
 def alerta(request):
     zona = Zona_protegida.objects.all()
     now = datetime.now()
-    date = str(now.day) + " / " + str(now.month) + " / " + str(now.year)
+    date = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
+    if request.method == 'POST':
+        alert_type = request.POST.get('slc_lrt_tp')
+        user =  request.POST.get('slc_user')
+        zone =  request.POST.get('slc_zone')
+        zone_id = Zona_protegida.objects.get(slug=zone)
+        a = Alerta(tipo_alerta = alert_type, usuario = user, fecha = date, zona = zone_id)
+        a.save()
     data = {'title': 'Alerta', 'zona' : zona, 'date' : date}
     return render(request, 'alerta/index.html', data)

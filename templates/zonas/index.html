@@ -3,6 +3,8 @@
 
 {% block header %}
 <link href='{% static "css/carousel.css" %}' rel="stylesheet">
+<link href='{% static "css/danger.css" %}' rel="stylesheet">
+
 {% endblock %}
 
 {% block contenido %}
@@ -36,7 +38,7 @@
                         <div class="container">
                             <div class="carousel-caption text-end">
                                 <h1>Parque Nacional Tayrona</h1>
-                                <p><a class="btn btn-outline-light " href="#">Leer más</a></p>
+                                <p><a class="btn btn-outline-light " href="/zonas/parque-nacional-tayrona">Leer más</a></p>
                             </div>
                         </div>
                     </div>
@@ -101,22 +103,32 @@
 
         <hr class="featurette-divider">
 
-        <div class="row featurette">
+        <div class="row featurette rounded " id="danger_bk" >
             <div class="col-md-7">
-                <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your
-                        mind.</span></h2>
-                <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting
-                    prose here.</p>
+                <div class="card text-center pt-3" style="background-color: black;">
+                <h1>Alertas generadas</h1>  
+                </div>
             </div>
             <div class="col-md-5">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                    height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                    preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa"
-                        dy=".3em">500x500</text>
-                </svg>
-
+                <div class="table-responsive">
+                    <table class="table table-bordered border-dark text-secondary" style="background-color: black;"> 
+                    <tr>
+                        <th>Zona</th>
+                        <th>Tipo de alerta</th>
+                    </tr>
+                    {% for row in alert %}
+                        <tr>
+                            <td>
+                                {{row.zona}}
+                            </td>
+                            <td>
+                                {{row.tipo_alerta}}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                </div>
+                
             </div>
         </div>
 
@@ -130,27 +142,6 @@
                     this layout would work with some actual real-world content in place.</p>
             </div>
             <div class="col-md-5 order-md-1">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                    height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                    preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa"
-                        dy=".3em">500x500</text>
-                </svg>
-
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really
-                    intended to be actually read, simply here to give you a better view of what this would look like
-                    with some actual content. Your content.</p>
-            </div>
-            <div class="col-md-5">
                 <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
                     height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
                     preserveAspectRatio="xMidYMid slice" focusable="false">

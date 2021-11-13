@@ -9,9 +9,9 @@
     <link rel="shortcut icon" href='{% static "images/logo.ico" %}' />
 
     <!-- Bootstrap CSS -->
-
+    <link href='{% static "css/login.css" %}' rel="stylesheet">
     <link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}'>
-   <!--<link href='{% static "css/alert.css" %}' rel="stylesheet">--> 
+    <!--<link href='{% static "css/alert.css" %}' rel="stylesheet">-->
     <title>{% block title %} {{ title }} {% endblock %}</title>
 
 </head>
@@ -26,23 +26,21 @@
                 <div class="form-floating py-2">
                     <select class="form-select" name="slc_lrt_tp" id="slc_lrt_tp">
                         <option selected>--Seleccione una alerta--</option>
-                        <option value=""></option>
+                        <option value="tala_ilegal">Tala ilegal</option>
                     </select>
                     <label for="slc_lrt_tp">Tipo de alerta</label>
                 </div>
-                <div class="form-floating py-2">
-                    <input type="text" class="form-control" id="slc_user" name="slc_user" value = "{{user.id}}" disabled readonly>
-                    <label for="slc_user">Id de usuario</label>
+                <div class="form-floating">
+                    <input type="hidden" class="form-control" id="slc_user" name="slc_user" value="{{user.id}}">
                 </div>
-                <div class="form-floating py-2">
-                    <input type="text" class="form-control" id="slc_date" name="slc_date" value="{{date}}" disabled readonly>
-                    <label for="slc_date">Fecha</label>
+                <div class="form-floating">
+                    <input type="hidden" class="form-control" id="slc_date" name="slc_date" value="{{date}}">
                 </div>
                 <div class="form-floating py-2">
                     <select class="form-select" name="slc_zone" id="slc_zone">
                         <option selected>--Seleccione una zona--</option>
                         {% for row in zona %}
-                            <option value="{{row.slug}}">{{row.nombre}}</option>
+                        <option value="{{row.slug}}">{{row.nombre}}</option>
                         {% endfor %}
                     </select>
                     <label for="slc_zone">Zonas</label>
