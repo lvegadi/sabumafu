@@ -19,31 +19,31 @@
 <body class="text-center">
     <div class="card w-25 my-5 mx-auto ">
         <div class="card-body">
-            <form id="alert_form" method="post" name="alert_form">
+            <form id="report_form" method="post" name="report_form">
                 {% csrf_token %}
                 <img src='{% static "images/logo.ico" %}' alt="ico" width="80" height="80">
                 <h1 class="h3 mb-3 fw-normal">Creación de alertas</h1>
                 <div class="form-floating py-2">
-                    <select class="form-select" name="slc_lrt_tp" id="slc_lrt_tp">
+                    <select class="form-select" name="rpt_lrt_tp" id="rpt_lrt_tp">
                         <option selected>--Seleccione una alerta--</option>
                         <option value="tala_ilegal">Tala ilegal</option>
                     </select>
-                    <label for="slc_lrt_tp">Tipo de alerta</label>
+                    <label for="rpt_lrt_tp">Tipo de alerta</label>
                 </div>
                 <div class="form-floating">
-                    <input type="hidden" class="form-control" id="slc_user" name="slc_user" value="{{user.id}}">
+                    <input type="hidden" class="form-control" id="rpt_user" name="rpt_user" value="{{user.id}}">
                 </div>
                 <div class="form-floating">
-                    <input type="hidden" class="form-control" id="slc_date" name="slc_date" value="{{date}}">
+                    <input type="hidden" class="form-control" id="rpt_date" name="rpt_date" value="{{date}}">
                 </div>
                 <div class="form-floating py-2">
-                    <select class="form-select" name="slc_zone" id="slc_zone">
+                    <select class="form-select" name="rpt_zone" id="rpt_zone">
                         <option selected>--Seleccione una zona--</option>
                         {% for row in zona %}
                         <option value="{{row.slug}}">{{row.nombre}}</option>
                         {% endfor %}
                     </select>
-                    <label for="slc_zone">Zonas</label>
+                    <label for="rpt_zone">Zonas</label>
                 </div>
                 <button class="btn btn-outline-success btn-block" type="submit">Ingresar</button>
             </form>

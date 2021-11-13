@@ -17,13 +17,14 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.urls import path
 from zonas.views import index, zona, todazona, registro, flora, todaflora, fauna, todafauna, alerta, report
-
+from municipios.views import index_municipio
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
+    #-- ZONAS --#
     path('index/', index, name="index"),
     path('zonas/<slug:slug>', zona, name="zona_detalles"),
     path('zonas/', todazona, name="zona_lista"),
@@ -35,6 +36,8 @@ urlpatterns = [
     path('account/',include('django.contrib.auth.urls')),
     path('alerta/', alerta, name="alert"),
     path('reporte/', report, name="report"),
+    #-- MUNICIPIOS --#
+    path('municipio/', index_municipio, name="index_municipio"),
 
 
 
