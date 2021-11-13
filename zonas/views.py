@@ -9,7 +9,7 @@ from django.contrib.auth.models import Permission, User
 import os
 from datetime import datetime
 # Create your views here.
-#editar
+#sirve mitimiti
 def index(request):
     alert = Alerta.objects.all()
     data = {'title': 'Sabumafu', 'alert' : alert}
@@ -82,7 +82,7 @@ def todafauna(request):
     data = {'title': 'Fauna', 'count': count, 'fauna': lista}
     return render(request, 'fauna/index.html', data)
 
-@login_required(login_url='/account/login/') #editar
+@login_required(login_url='/account/login/') #sirve
 def alerta(request):
     zona = Zona_protegida.objects.all()
     now = datetime.now()
