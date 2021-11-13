@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from django.urls import path
-from zonas.views import index, zona, todazona, registro, flora, todaflora, fauna, todafauna, alerta
+from zonas.views import index, zona, todazona, registro, flora, todaflora, fauna, todafauna, alerta, report
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -34,6 +34,8 @@ urlpatterns = [
     path('fauna/',todafauna,name="fauna_lista"),
     path('account/',include('django.contrib.auth.urls')),
     path('alerta/', alerta, name="alert"),
+    path('reporte/', report, name="report"),
+
 
 
 

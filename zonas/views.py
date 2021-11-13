@@ -96,3 +96,9 @@ def alerta(request):
         a.save()
     data = {'title': 'Alerta', 'zona' : zona, 'date' : date}
     return render(request, 'alerta/index.html', data)
+
+@login_required(login_url='/account/login/')
+def report(request):
+    
+    return render(request, 'reporte/index.html')
+
