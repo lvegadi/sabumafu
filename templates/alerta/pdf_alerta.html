@@ -1,0 +1,53 @@
+<style>
+    table {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  
+    th
+    {
+      background-color: rgb(95, 104, 99);
+      font-family:  rgb(240, 248, 243);
+      padding: 5px;
+    }
+
+    td {
+      padding: 5px;
+    }
+  
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+ 
+  <h1> {{ titulo }}</h1>
+  <h2> {{ titulo2 }}</h2>
+
+ 
+ 
+  <table border="1" >
+    <thead>
+      <tr  >
+        <th  WIDTH="30"  >Id</th>
+        <th  WIDTH="130">Tipo Alerta</th>
+        <th  WIDTH="130">Usuario</th>
+        <th  WIDTH="100">Fecha</th>
+        <th  WIDTH="130">Zona</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in alerta %}
+      <tr>
+        <td>{{ row.id }}</td>
+        <td>{{ row.tipo_alerta }}</td>
+        <td>{{ row.username }}</td>
+        <td>{{ row.fecha |date:"M d, Y" }}</td>
+        <td>{{ row.nombre }}</td> 
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+
+  

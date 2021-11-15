@@ -1,5 +1,13 @@
 from django.shortcuts import render
 from django.http import Http404
+
+#librerias PDF
+from io import BytesIO
+from django import template
+from django.http.response import HttpResponse
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+
 # Importar modelos
 from zonas.models import Alerta, Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
 from zonas.forms import UserRegister
@@ -101,4 +109,31 @@ def alerta(request):
 def report(request):
     
     return render(request, 'reporte/index.html')
+    
+    
+    #Primer reporte PDF
+    
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='aplication/pdf')
+    return None
+
+def alerta_pdf(request):
+
+    #alerta = Alerta.objects.all()
+    #alerta = Alerta.objects.all().select_related(Zona_protegida.objects.all())
+    alerta =  Alerta.objects.raw('select zonas_alerta.id, zonas_alerta.tipo_alerta, zonas_alerta.usuario, zonas_alerta.fecha, zonas_zona_protegida.nombre, auth_user.username from zonas_alerta inner join zonas_zona_protegida on zonas_alerta.zona_id=zonas_zona_protegida.id inner join auth_user on auth_user.id=zonas_alerta.usuario')
+    titulo =  'SABUMAFU'
+    titulo2 =  'Listado Alertas'
+
+
+    data = {'alerta': alerta, 'titulo': titulo, 'titulo2': titulo2}
+    pdf = render_to_pdf('alerta/pdf_alerta.html', data)
+    return HttpResponse(pdf, content_type='application/pdf')
+
 
