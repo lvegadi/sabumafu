@@ -123,17 +123,37 @@ def render_to_pdf(template_src, context_dict={}):
         return HttpResponse(result.getvalue(), content_type='aplication/pdf')
     return None
 
-def alerta_pdf(request):
+# def alerta_pdf(request):
 
-    #alerta = Alerta.objects.all()
-    #alerta = Alerta.objects.all().select_related(Zona_protegida.objects.all())
-    alerta =  Alerta.objects.raw('select zonas_alerta.id, zonas_alerta.tipo_alerta, zonas_alerta.usuario, zonas_alerta.fecha, zonas_zona_protegida.nombre, auth_user.username from zonas_alerta inner join zonas_zona_protegida on zonas_alerta.zona_id=zonas_zona_protegida.id inner join auth_user on auth_user.id=zonas_alerta.usuario')
-    titulo =  'SABUMAFU'
-    titulo2 =  'Listado Alertas'
+#     #alerta = Alerta.objects.all()
+#     #alerta = Alerta.objects.all().select_related(Zona_protegida.objects.all())
+#     alerta =  Alerta.objects.raw('select zonas_alerta.id, zonas_alerta.tipo_alerta, zonas_alerta.usuario, zonas_alerta.fecha, zonas_zona_protegida.nombre, auth_user.username from zonas_alerta inner join zonas_zona_protegida on zonas_alerta.zona_id=zonas_zona_protegida.id inner join auth_user on auth_user.id=zonas_alerta.usuario')
+#     titulo =  'SABUMAFU'
+#     titulo2 =  'Listado Alertas'
 
 
-    data = {'alerta': alerta, 'titulo': titulo, 'titulo2': titulo2}
-    pdf = render_to_pdf('alerta/pdf_alerta.html', data)
-    return HttpResponse(pdf, content_type='application/pdf')
+#     data = {'alerta': alerta, 'titulo': titulo, 'titulo2': titulo2}
+#     pdf = render_to_pdf('alerta/pdf_alerta.html', data)
+#     return HttpResponse(pdf, content_type='application/pdf')
+
+def alerta_filtros(request):
+    if request.method == 'POST':
+       zone =  (request.POST.get('slc_zone'))
+       alerta =  Alerta.objects.raw( 'select zonas_alerta.id, zonas_alerta.tipo_alerta, zonas_alerta.usuario, zonas_alerta.fecha, zonas_zona_protegida.nombre, auth_user.username from zonas_alerta inner join zonas_zona_protegida on zonas_alerta.zona_id=zonas_zona_protegida.id inner join auth_user on auth_user.id=zonas_alerta.usuario where zonas_zona_protegida.id=' + zone  )
+       titulo =  'SABUMAFU'
+       titulo2 =  'Listado Alertas'
+
+       myzona = Zona_protegida.objects.get(id=zone)
+
+       data = {'alerta': alerta, 'titulo': titulo, 'titulo2': titulo2, 'myzona':myzona}
+       pdf = render_to_pdf('alerta/pdf_alerta.html', data)
+       return HttpResponse(pdf, content_type='application/pdf')
+
+
+    lista = Zona_protegida.objects.all()
+    data = {'title': 'Zonas protegidas', 'lista': lista}
+    return render(request, 'zonas/filtros.html', data)
+
+
 
 

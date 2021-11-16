@@ -22,7 +22,10 @@
   </style>
  
   <h1> {{ titulo }}</h1>
-  <h2> {{ titulo2 }}</h2>
+  <h2> {{ titulo2 }} Zona Protegida:   {{ myzona.nombre }} </h2>
+  <h3> Latitud: {{ myzona.latitud }}  </h3>
+  <h3> Longitud:{{ myzona.longitud }} </h3>
+  <br>
 
  
  
@@ -33,7 +36,7 @@
         <th  WIDTH="130">Tipo Alerta</th>
         <th  WIDTH="130">Usuario</th>
         <th  WIDTH="100">Fecha</th>
-        <th  WIDTH="130">Zona</th>
+
       </tr>
     </thead>
     <tbody>
@@ -43,7 +46,6 @@
         <td>{{ row.tipo_alerta }}</td>
         <td>{{ row.username }}</td>
         <td>{{ row.fecha |date:"M d, Y" }}</td>
-        <td>{{ row.nombre }}</td> 
       </tr>
       {% endfor %}
     </tbody>

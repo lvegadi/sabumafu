@@ -1,0 +1,41 @@
+
+{% extends 'home.html' %} {% block contenido %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-4">
+      <h1 class="text-center"><br>Seleccione Zona Protegida</h1>
+
+       <div class="container">
+        <div class="row">
+          <div class="col-10 offset-1">
+            <form class="mt-5" action="{% url "alerta-pdf" %}" method="post">
+               {% csrf_token %}
+              <div class="form-group mb-2">
+  
+
+                <div class="form-floating py-2">
+                    <select class="form-select" name="slc_zone" id="slc_zone">
+                        <option selected>--Seleccione una Zona Protegida--</option>
+                        {% for row in lista %}
+                           <option value="{{row.id}}">{{row.nombre}}</option>
+                        {% endfor %}
+                    </select>
+        
+                </div>
+
+              <input
+                type="submit"
+                class="btn btn-outline-success mt-4 col-md-2"
+                value="Consultar"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
