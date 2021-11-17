@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from django.urls import path
-from zonas.views import index, zona, todazona, registro, flora, todaflora, fauna, todafauna, alerta, reportes,dashboard, alerta_filtros
+from zonas.views import index, zona, todazona, registro, flora, todaflora, fauna, todafauna, alerta, dashboard,reportes,reporte_alerta
 from municipios.views import index_municipio
 from django.conf import settings
 from django.conf.urls.static import static
@@ -40,7 +40,7 @@ urlpatterns = [
     #-- DASHBOARD --#
     path('dashboard/', dashboard, name="dashboard"),
     path('dashboard/reportes/', reportes, name="reportes"),
-    #path('zonas', alerta_pdf, name='alerta-pdf'),
+    path('dashboard/reportes/alertas', reporte_alerta, name='pdf_alerta'),
 
 
 

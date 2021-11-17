@@ -1,0 +1,62 @@
+<style>
+    table {
+      font-size: 12px;
+      margin-bottom: 20px;
+
+    }
+  
+    th
+    {
+      background-color: grey;
+      font-family:  rgb(240, 248, 243);
+      padding: 5px;
+      width: auto;
+    }
+
+    td {
+      padding: 5px;
+    }
+  
+    p {
+      font-size: 12px;
+
+    }
+
+  </style>
+  <h1 align="center">Sistema de Gestion de Alertas Sabumafu</h1>
+
+  <h2> Zona Protegida: {{ myzona.nombre }} </h2>
+  <p> <b>Latitud: </b> {{ myzona.latitud }}  </p>
+  <p> <b>Longitud: </b>{{ myzona.longitud }} </p>
+  <br>
+
+ 
+ 
+  <table border="0.5"  cellspacing="2" cellpadding="2" >
+    <thead>
+      <tr  >
+        <th>Id</th>
+        <th>Tipo Alerta</th>
+        <th>Usuario</th>
+        <th>Fecha</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in alerta %}
+      <tr>
+        <td>{{ row.id }}</td>
+        <td>{{ row.tipo_alerta }}</td>
+        <td>{{ row.username }}</td>
+        <td>{{ row.fecha |date:"M d, Y" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <p align="center">
+      Impreso por: {{user}} fecha: {{fecha}}
+  </p>
+
+
+  

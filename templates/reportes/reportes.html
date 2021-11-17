@@ -1,4 +1,14 @@
 {% extends 'dashboard.html' %}
 {% block contenido %}
-<h1>Hola mundo</h1>
+<h2>Todos los reportes</h2>
+<ul>
+    <li>
+        <a href="{%url 'pdf_alerta' %}"  class="nav-link px-2 d-block link-dark text-decoration-none text-black">
+            <span data-feather="file-text"></span>
+            Reportes de alertas
+        </a>
+    </li>
+
+
+</ul>
 {% endblock %}

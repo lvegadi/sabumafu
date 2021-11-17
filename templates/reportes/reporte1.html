@@ -1,0 +1,25 @@
+{% extends 'dashboard.html' %}
+{% block contenido %}
+<h2>Reporte de alertas</h2>
+<div class="row">
+  <div class="col-10">
+    <br>
+
+    <form action='{% url "pdf_alerta" %}' method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="zona">Seleccione Zona Protegida:</label>
+        <select class="form-select" name="zona" id="zona">
+          {% for row in lista %}
+          <option value="{{row.id}}">{{row.nombre}}</option>
+          {% endfor %}
+        </select>
+        <br>
+        <input type="submit" class="btn btn-dark" value="Consultar"></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}
