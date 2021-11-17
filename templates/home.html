@@ -12,7 +12,7 @@
   <!-- Bootstrap CSS -->
 
   <link rel="stylesheet" href='{% static "css/bootstrap.min.css" %}'>
-  <link href='{% static "css/headers.css" %}' rel="stylesheet">
+  <link href='{% static "css/main.css" %}' rel="stylesheet">
   <title>{% block title %} {{ title }} {% endblock %}</title>
   {% block header %}
   {% endblock %}
@@ -24,7 +24,7 @@
     <div class="container-fluid">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <div class="">
-          <a href="/index/" class="d-block text-white text-decoration-none fs-4 ">
+          <a href="{% url 'index' %}" class="d-block text-white text-decoration-none fs-4 ">
             <img src='{% static "images/logo.ico" %}' alt="ico" width="40" height="40">
             Sabumafu
           </a>
@@ -51,7 +51,6 @@
             </div>
           </li>
 
-          <li><a href="{% url 'alert' %}" class="nav-link px-2 text-white">Alertas</a></li>
 
           <li>
             <div class="dropdown text-end">
@@ -69,20 +68,10 @@
               </ul>
             </div>
           </li>
-
-          <li>
-            <div class="dropdown text-end">
-              <a href="#" class="nav-link px-2 d-block link-dark text-decoration-none dropdown-toggle text-white"
-                id="dropdown2" data-bs-toggle="dropdown" aria-expanded="false">
-                Reportes
-              </a>
-              <ul class="dropdown-menu text-medium" aria-labelledby="dropdown2">
-               <li><a class="dropdown-item" href="{% url 'alerta-pdf' %}">Alerta</a></li>
-
-              </ul>
-            </div>
-          </li>
-
+          <li><a href="{% url 'alert' %}" class="nav-link px-2 text-white">Alertas</a></li>
+          {% if user %}
+          <li><a href="{% url 'reportes' %}" class="nav-link px-2 text-white">Reportes</a></li>
+          {% endif %}
 
           <li><a href="#" class="nav-link px-2 text-white">Acerca de</a></li>
         </ul>
@@ -101,9 +90,10 @@
             </button>
             <ul class="dropdown-menu">
               {% if user.is_superuser == 1 %}
-                <li><a class="dropdown-item" href="/admin/">Perfil admin</a></li>
-                <li><a class="dropdown-item" href="/reporte/">Reportes</a></li>
+              <li><a class="dropdown-item" href="/admin/">Administracion</a></li>
+
               {% endif %}
+              <li><a class="dropdown-item" href="/dashboard/">Perfil</a></li>
               <li><a class="dropdown-item" href="/account/logout">Cerrar sesión</a></li>
             </ul>
           </div>
@@ -124,12 +114,10 @@
   </header>
 
   <!-- Contenido -->
-
   {% block contenido %}
   {% endblock%}
-
   <!-- Footer -->
-  <footer class="text-muted py-5 bg-dark">
+  <footer class="text-muted fixed-down py-5 bg-dark">
     <div class="container">
       <p class="float-end mb-1">
         <a href="#">Back to top</a>

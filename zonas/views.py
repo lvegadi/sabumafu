@@ -105,11 +105,18 @@ def alerta(request):
     data = {'title': 'Alerta', 'zona' : zona, 'date' : date}
     return render(request, 'alerta/index.html', data)
 
+# ALERTAS
+
 @login_required(login_url='/account/login/')
-def report(request):
+def dashboard(request):
+    return render(request,'reportes/index.html')  
     
-    return render(request, 'reporte/index.html')
-    
+    #Primer reporte PDF
+
+@login_required(login_url='/account/login/')
+def reportes(request):
+
+    return render(request,'reportes/reportes.html')  
     
     #Primer reporte PDF
     
