@@ -120,6 +120,17 @@ def reportes(request):
     data = {'title': 'Reportes'}
     return render(request,'reportes/reportes.html',data)  
 
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='aplication/pdf')
+    return None
+
+
 # Reporte 1
 @login_required(login_url='/account/login/')
 def reporte_alerta(request):
@@ -140,20 +151,39 @@ def reporte_alerta(request):
     data = {'title': 'Reporte de filtros', 'lista': lista}
     return render(request, 'reportes/reporte1.html', data)    
 
-    
-def render_to_pdf(template_src, context_dict={}):
-    template = get_template(template_src)
-    html = template.render(context_dict)
-    result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
-
-    if not pdf.err:
-        return HttpResponse(result.getvalue(), content_type='aplication/pdf')
-    return None
-
-
-
-
+# Reporte 2
+@login_required(login_url='/account/login/')
+def reporte_fauna(request):
+    if request.method == 'POST':
+       zone =  (request.POST.get('zona'))
+       fauna = Fauna.objects.raw('SELECT zonas_fauna.id, zonas_fauna.nombre, zonas_fauna.especie, zonas_fauna.descripcion, zonas_fauna_zona.observaciones FROM zonas_fauna, zonas_fauna_zona where zonas_fauna.id = zonas_fauna_zona.fauna_id   and zonas_fauna_zona.zona_id =' + zone  )
+       myzona = Zona_protegida.objects.get(id=zone)
+       username = request.user.username
+       now = timezone.now()
+       data = {'fauna': fauna,'user':username,'fecha':now, 'myzona':myzona}
+       pdf = render_to_pdf('reportes/pdf_fauna.html', data)
+       return HttpResponse(pdf, content_type='application/pdf')
 
 
+    lista = Zona_protegida.objects.all()
+    data = {'title': 'Reporte de filtros', 'lista': lista}
+    return render(request, 'reportes/reporte2.html', data)    
 
+
+# Reporte 3
+@login_required(login_url='/account/login/')
+def reporte_flora(request):
+    if request.method == 'POST':
+       zone =  (request.POST.get('zona'))
+       flora = Flora.objects.raw('SELECT zonas_flora.id, zonas_flora.nombre, zonas_flora.especie, zonas_flora.descripcion, zonas_flora_zona.observaciones FROM zonas_flora, zonas_flora_zona where zonas_flora.id = zonas_flora_zona.flora_id   and zonas_flora_zona.zona_id =' + zone  )
+       myzona = Zona_protegida.objects.get(id=zone)
+       username = request.user.username
+       now = timezone.now()
+       data = {'flora': flora,'user':username,'fecha':now, 'myzona':myzona}
+       pdf = render_to_pdf('reportes/pdf_flora.html', data)
+       return HttpResponse(pdf, content_type='application/pdf')
+
+
+    lista = Zona_protegida.objects.all()
+    data = {'title': 'Reporte de filtros', 'lista': lista}
+    return render(request, 'reportes/reporte3.html', data)    
