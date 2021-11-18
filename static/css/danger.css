@@ -2,3 +2,8 @@
     background-image:url("../images/warning.jpg");
     background-size: cover  ;
 }
+.imagecarrousel{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}

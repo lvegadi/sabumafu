@@ -1,5 +1,6 @@
 {% extends 'dashboard.html' %}
 {% block contenido %}
+<div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 <h2>Todos los reportes</h2>
 <ul>
     <li>
@@ -8,7 +9,21 @@
             Reportes de alertas
         </a>
     </li>
+    <li>
+        <a href="{%url 'pdf_alerta' %}"  class="nav-link px-2 d-block link-dark text-decoration-none text-black">
+            <span data-feather="file-text"></span>
+            Reportes de alertas
+        </a>
+    </li>
+    <li>
+        <a href="{%url 'pdf_alerta' %}"  class="nav-link px-2 d-block link-dark text-decoration-none text-black">
+            <span data-feather="file-text"></span>
+            Reportes de alertas
+        </a>
+    </li>
 
 
-</ul>
+</ul>    
+</div>
+
 {% endblock %}

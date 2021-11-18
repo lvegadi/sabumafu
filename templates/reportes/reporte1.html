@@ -5,7 +5,7 @@
   <div class="col-10">
     <br>
 
-    <form action='{% url "pdf_alerta" %}' method="post">
+    <form action='' method="post">
       {% csrf_token %}
       <div class="form-group">
         <label for="zona">Seleccione Zona Protegida:</label>
@@ -14,9 +14,20 @@
           <option value="{{row.id}}">{{row.nombre}}</option>
           {% endfor %}
         </select>
-        <br>
-        <input type="submit" class="btn btn-dark" value="Consultar"></button>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+         <label for="fecha_inicio">Fecha minima:</label>
+        <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control">
+        </div>
+        <div class="col-md-6">
+           <label for="fecha_fin">Fecha maxima:</label>
+        <input type="date" name="fecha_fin" id="fecha_fin" class="form-control">
+        </div>
       </div>
+
+      <br>
+        <input type="submit" class="btn btn-dark" value="Consultar"></div>
     </form>
   </div>
 </div>
