@@ -64,7 +64,6 @@ class Flora(models.Model):
 
 
 class Fauna_zona(models.Model):
-    poblacion = models.DecimalField(max_digits=10, decimal_places=0)
     observaciones = models.TextField()
     fauna = models.ForeignKey(
         Fauna, on_delete=models.CASCADE, null=True, blank=True)
@@ -76,7 +75,6 @@ class Fauna_zona(models.Model):
 
 
 class Flora_zona(models.Model):
-    poblacion = models.DecimalField(max_digits=10, decimal_places=0)
     observaciones = models.TextField()
     flora = models.ForeignKey(
         Flora, on_delete=models.CASCADE, null=True, blank=True)
