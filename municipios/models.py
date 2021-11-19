@@ -35,14 +35,14 @@ class Departamento(models.Model):
 class Municipio(models.Model):
     nombre = models.CharField(max_length=45)
     codigo = models.CharField(max_length=20)
-    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE, null=True, blank=True)
+    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     def __str__(self):
         return self.nombre;
 
 class Entidad_municipio(models.Model):
-    entidad = models.ForeignKey(Entidad_reguladora, on_delete=models.CASCADE, null=True, blank=True)
-    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)
+    entidad = models.ForeignKey(Entidad_reguladora, on_delete=models.CASCADE)
+    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
 
 class ONG_municipio(models.Model):
-    ong = models.ForeignKey(ONG, on_delete=models.CASCADE, null=True, blank=True)
-    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)    
+    ong = models.ForeignKey(ONG, on_delete=models.CASCADE)
+    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)    

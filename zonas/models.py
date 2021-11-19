@@ -23,7 +23,7 @@ class Zona_protegida(models.Model):
     nombre = models.CharField(max_length=45)
     descripcion = models.TextField()
     caracteristicas = models.TextField()
-    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)
+    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
     latitud = models.DecimalField(max_digits=20, decimal_places=10)
     longitud = models.DecimalField(max_digits=20, decimal_places=10)
     geojson = models.FileField(upload_to=geojson_upload_handler, blank=True, null=True)
@@ -43,7 +43,7 @@ class Alerta(models.Model):
     usuario = models.DecimalField(max_digits=10, decimal_places=0)
     fecha = models.DateField()
     zona = models.ForeignKey(
-        Zona_protegida, on_delete=models.CASCADE, blank=True, null=True)
+        Zona_protegida, on_delete=models.CASCADE)
 
 
 class Fauna(models.Model):
@@ -66,9 +66,9 @@ class Flora(models.Model):
 class Fauna_zona(models.Model):
     observaciones = models.TextField()
     fauna = models.ForeignKey(
-        Fauna, on_delete=models.CASCADE, null=True, blank=True)
+        Fauna, on_delete=models.CASCADE,)
     zona = models.ForeignKey(
-        Zona_protegida, on_delete=models.CASCADE, null=True, blank=True)
+        Zona_protegida, on_delete=models.CASCADE,)
     def __str__(self):
         return self.fauna.nombre + " en " + self.zona.nombre
 
@@ -77,9 +77,9 @@ class Fauna_zona(models.Model):
 class Flora_zona(models.Model):
     observaciones = models.TextField()
     flora = models.ForeignKey(
-        Flora, on_delete=models.CASCADE, null=True, blank=True)
+        Flora, on_delete=models.CASCADE)
     zona = models.ForeignKey(
-        Zona_protegida, on_delete=models.CASCADE, null=True, blank=True)
+        Zona_protegida, on_delete=models.CASCADE)
     def __str__(self):
         return self.flora.nombre + " en " + self.zona.nombre
 
@@ -88,14 +88,14 @@ class Fauna_poblacion(models.Model):
     poblacion_historica = models.DecimalField(max_digits=10, decimal_places=0)
     fecha = models.DateField()
     fauna = models.ForeignKey(
-        Fauna_zona, on_delete=models.CASCADE, null=True, blank=True)
+        Fauna_zona, on_delete=models.CASCADE)
 
 
 class Flora_poblacion(models.Model):
     poblacion_historica = models.DecimalField(max_digits=10, decimal_places=0)
     fecha = models.DateField()
     flora = models.ForeignKey(
-        Flora_zona, on_delete=models.CASCADE, null=True, blank=True)
+        Flora_zona, on_delete=models.CASCADE)
 
 
 def zona_pre_save(sender, instance, *args, **kwargs):
