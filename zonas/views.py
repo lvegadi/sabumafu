@@ -11,6 +11,7 @@ from django.utils import timezone
 
 # Importar modelos
 from zonas.models import Alerta, Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
+from municipios.models import Departamento, Municipio
 from zonas.forms import UserRegister
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -187,3 +188,25 @@ def reporte_flora(request):
     lista = Zona_protegida.objects.all()
     data = {'title': 'Reporte de filtros', 'lista': lista}
     return render(request, 'reportes/reporte3.html', data)    
+
+
+# Reporte 4
+@login_required(login_url='/account/login/')
+def reporte_dpto(request):
+    if request.method == 'POST':
+       dpto =  (request.POST.get('dpto'))
+
+       municipios = Municipio.objects.raw('SELECT municipios_municipio.id, municipios_municipio.nombre, municipios_municipio.codigo, municipios_municipio.departamento_id,municipios_departamento.id FROM municipios_municipio, municipios_departamento where municipios_municipio.departamento_id = municipios_departamento.id and municipios_departamento.id =' + dpto  )
+       zonas_protegidas = Zona_protegida.objects.raw('SELECT zonas_zona_protegida.nombre, zonas_zona_protegida.latitud, zonas_zona_protegida.longitud,zonas_zona_protegida.descripcion,zonas_zona_protegida.municipio_id,zonas_zona_protegida.id FROM zonas_zona_protegida, municipios_municipio  where zonas_zona_protegida.municipio_id = municipios_municipio.id  and municipios_municipio.departamento_id =' + dpto  )
+       mydpto = Departamento.objects.get(id=dpto)
+  
+       username = request.user.username
+       now = timezone.now()
+       data = {'municipios': municipios,'zonas_protegidas': zonas_protegidas,'user':username,'fecha':now, 'mydpto':mydpto}
+       pdf = render_to_pdf('reportes/pdf_dpto.html', data)
+       return HttpResponse(pdf, content_type='application/pdf')
+
+
+    lista = Departamento.objects.all()
+    data = {'title': 'Reporte de filtros', 'lista': lista}
+    return render(request, 'reportes/reporte4.html', data)    
