@@ -1,0 +1,69 @@
+<style>
+    table {
+      font-size: 12px;
+      margin-bottom: 20px;
+
+    }
+  
+    th
+    {
+      background-color: grey;
+      font-family:  rgb(240, 248, 243);
+      padding: 5px;
+      width: auto;
+    }
+
+    td {
+      padding: 5px;
+    }
+  
+    p {
+      font-size: 12px;
+
+    }
+
+  </style>
+  <h1 align="center">Sistema de Gestion de Departamentos (Zonas Protegidas ) Sabumafu</h1>
+
+  <h2> Departamento: {{ mydpto.nombre }} </h2>
+
+  <br>  <br>  
+
+  {% for rowm in municipios %}
+      <h3>  Municipio: {{ rowm.nombre }}   -    {{ rowm.codigo }} </h3> 
+    
+      <table border="0.5"  cellspacing="2" cellpadding="1" >
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+         
+    
+          </tr>
+        </thead>
+        <tbody>
+          {% for rowzp in zonas_protegidas %}
+              {% if rowzp.municipio_id == rowm.id %}
+                <tr>
+                  <td  WIDTH="100">{{ rowzp.nombre }}</td>
+                  <td  WIDTH="90">{{ rowzp.latitud }}</td>
+                  <td  WIDTH="90">{{ rowzp.longitud }}</td>
+                 
+                </tr>
+                {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>  
+     
+
+  {% endfor %}
+  
+   <br>
+  <p align="center">
+      Impreso por: {{user}} fecha: {{fecha}}
+  </p>
+
+
+  
