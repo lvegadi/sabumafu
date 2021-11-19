@@ -50,7 +50,7 @@ class Fauna(models.Model):
     nombre = models.CharField(max_length=45)
     especie = models.CharField(max_length=45)
     image = models.ImageField(upload_to=image_upload_handler, blank=True, null=True)
-    descripcion = models.CharField(max_length=200)
+    descripcion = models.TextField()
     def __str__(self):
         return self.nombre + " " + self.especie
 
@@ -58,8 +58,7 @@ class Flora(models.Model):
     nombre = models.CharField(max_length=45)
     especie = models.CharField(max_length=45)
     image = models.ImageField(upload_to=image_upload_handler, blank=True, null=True)
-    descripcion = models.CharField(max_length=200)
-
+    descripcion = models.TextField()
     def __str__(self):
         return self.nombre + " " + self.especie
 
