@@ -164,6 +164,18 @@ def reporte_fauna(request):
        data = {'fauna': fauna,'user':username,'fecha':now, 'myzona':myzona}
        pdf = render_to_pdf('reportes/pdf_fauna.html', data)
        return HttpResponse(pdf, content_type='application/pdf')
+    #NO sirvio de esta manera
+    # if request.method == 'POST':
+    #    zone =  (request.POST.get('zona'))
+    #    myzona = Zona_protegida.objects.get(id=zone)
+   
+    #    fauna = []
+
+    #    queryzonas = (Fauna_zona.objects.filter(zona=zone))
+    #    if queryzonas.count() > 0:
+    #         for rowzonas in queryzonas:
+    #             faunaquery = (Fauna.objects.get(fauna=rowzonas.fauna))
+    #             fauna.append({'id':faunaquery.id,'nombre':faunaquery.nombre,'especies':faunaquery.especies,'descripcion':faunaquery.descripcion,'image':faunaquery.image})
 
 
     lista = Zona_protegida.objects.all()
@@ -183,6 +195,18 @@ def reporte_flora(request):
        data = {'flora': flora,'user':username,'fecha':now, 'myzona':myzona}
        pdf = render_to_pdf('reportes/pdf_flora.html', data)
        return HttpResponse(pdf, content_type='application/pdf')
+    
+    #No sirvio de esta manera
+    # if request.method == 'POST':
+    #    zone =  (request.POST.get('zona'))
+    #    myzona = Zona_protegida.objects.get(id=zone)
+    #    flora = []
+
+    #    queryzonas = (Flora_zona.objects.filter(zona=zone))
+    #    if queryzonas.count() > 0:
+    #         for rowzonas in queryzonas:
+    #             floraquery = (Flora.objects.get(flora=rowzonas.flora))
+    #             flora.append({'id':floraquery.id,'nombre':floraquery.nombre,'especies':floraquery.especies,'descripcion':floraquery.descripcion,'image':floraquery.image})
 
 
     lista = Zona_protegida.objects.all()
@@ -209,4 +233,71 @@ def reporte_dpto(request):
 
     lista = Departamento.objects.all()
     data = {'title': 'Reporte de filtros', 'lista': lista}
+    return render(request, 'reportes/reporte4.html', data)   
+
+# Reporte 4
+@login_required(login_url='/account/login/')
+def reporte_dpto(request):
+    if request.method == 'POST':
+       dpto =  (request.POST.get('dpto'))
+       mydpto = Departamento.objects.get(id=dpto)
+
+       municipios = []
+       zonas_protegidas = []
+
+       #Se filtran todos los municipios del departamento seleccionado
+       query_municipios = (Municipio.objects.select_related('departamento').filter(departamento_id=dpto))
+
+       #Se recorren para buscar las solo las ONGs asociados y municipíos que contengan información.
+       for rowmun in query_municipios:
+           zonpro = (Zona_protegida.objects.filter(municipio=rowmun.id))
+           if zonpro.count() > 0:
+              municipios.append({'id':rowmun.id,'codigo':rowmun.codigo,'nombre':rowmun.nombre} )
+              for rowpro in zonpro:
+                  zonas_protegidas.append({'id':rowpro.id,'municipio_id':rowpro.municipio_id,'nombre':rowpro.nombre,'latitud':rowpro.latitud,'longitud':rowpro.longitud,'descripcion':rowpro.descripcion, 'slug':rowpro.slug})
+
+      
+  
+       username = request.user.username
+       now = timezone.now()
+       data = {'municipios': municipios,'zonas_protegidas': zonas_protegidas,'user':username,'fecha':now, 'mydpto':mydpto}
+       pdf = render_to_pdf('reportes/pdf_dpto.html', data)
+       return HttpResponse(pdf, content_type='application/pdf')
+
+
+    lista = Departamento.objects.all()
+    data = {'title': 'Reporte de filtros', 'lista': lista}
     return render(request, 'reportes/reporte4.html', data)    
+
+    # Reporte 5
+@login_required(login_url='/account/login/')
+def reporte_ong(request):
+    if request.method == 'POST':
+       dpto =  (request.POST.get('dpto'))
+       mydpto = Departamento.objects.get(id=dpto)
+       todas_ong = []
+       todos_municipios = []
+
+       #Se filtran todos los municipios del departamento seleccionado
+       query_municipios = (Municipio.objects.select_related('departamento').filter(departamento_id=dpto))
+
+       #Se recorren para buscar las solo las ONGs asociados y municipíos que contengan información.
+       for rowmun in query_municipios:
+           ongmun = (ONG_municipio.objects.filter(municipio=rowmun.id))
+           if ongmun.count() > 0:
+              todos_municipios.append({'id':rowmun.id,'codigo':rowmun.codigo,'nombre':rowmun.nombre} )
+              for rowong in ongmun:
+                  ong = ONG.objects.get(id=rowong.ong_id)
+                  todas_ong.append({'id':rowong.id,'municipio_id':rowong.municipio_id,'nombre':ong.nombre,'tipo':ong.tipo, 'correo':ong.correo,'image':ong.image,'telefono':ong.telefono})
+
+      
+       username = request.user.username
+       now = timezone.now()
+       data = {'todos_municipios': todos_municipios,'todas_ong': todas_ong,'user':username,'fecha':now, 'mydpto':mydpto}
+       pdf = render_to_pdf('reportes/pdf_ong.html', data)
+       return HttpResponse(pdf, content_type='application/pdf')
+
+
+    lista = Departamento.objects.all()
+    data = {'title': 'Reporte de filtros', 'lista': lista}
+    return render(request, 'reportes/reporte5.html', data)   
