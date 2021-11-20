@@ -1,0 +1,70 @@
+<style>
+    table {
+      font-size: 12px;
+      margin-bottom: 20px;
+
+    }
+  
+    th
+    {
+      background-color: grey;
+      font-family:  rgb(240, 248, 243);
+      padding: 5px;
+      width: auto;
+    }
+
+    td {
+      padding: 5px;
+    }
+  
+    p {
+      font-size: 12px;
+
+    }
+
+  </style>
+  <h1 align="center">Sistema de Gestion de Departamentos (ONGs ) Sabumafu</h1>
+
+  <h2> Departamento:  {{ mydpto.nombre }} </h2>
+  {{ paso }}
+
+  <br>  <br>  
+  {% for rowm in todos_municipios %}
+      <h3>  Municipio:  {{ rowm.nombre }}   -    {{ rowm.codigo }}  </h3> 
+    
+      <table border="0.5"  cellspacing="2" cellpadding="2" >
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+          </tr>
+        </thead>
+        <tbody>
+   
+          {% for rowongs in todas_ong %}
+                {% if rowongs.municipio_id == rowm.id %}
+                    <tr>
+                      <td WIDTH="120" >{{ rowongs.nombre }}</td>
+                      <td WIDTH="100" >{{ rowongs.tipo }}</td>
+                      <td WIDTH="100" >{{ rowongs.telefono }}</td>
+                      <td WIDTH="200" >{{ rowongs.correo }}</td>
+                    
+                    </tr>
+                {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>  
+     
+
+  {% endfor %}
+  
+   <br>
+  <p align="center">
+      Impreso por: {{user}} fecha: {{fecha}}
+  </p>
+
+
+  

@@ -1,0 +1,25 @@
+{% extends 'dashboard.html' %}
+{% block contenido %}
+<h2>Reporte ONGs por Departamentos-Municipios</h2>
+<div class="row">
+  <div class="col-10">
+    <br>
+
+    <form action='{% url "pdf_ong" %}' method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="dpto">Seleccione Departamento:</label>
+        <select class="form-select" name="dpto" id="dpto">
+          {% for row in lista %}
+          <option value="{{row.id}}">{{row.nombre}}</option>
+          {% endfor %}
+        </select>
+        <br>
+        <input type="submit" class="btn btn-dark" value="Consultar"></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}
