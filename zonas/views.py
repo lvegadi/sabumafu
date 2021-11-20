@@ -11,7 +11,7 @@ from django.utils import timezone
 
 # Importar modelos
 from zonas.models import Alerta, Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
-from municipios.models import Departamento, Municipio
+from municipios.models import Departamento, Municipio, ONG_municipio, ONG
 from zonas.forms import UserRegister
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
