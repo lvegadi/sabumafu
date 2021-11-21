@@ -48,7 +48,16 @@
         <td>{{ row.id }}</td>
         <td>{{ row.nombre }}</td>
         <td>{{ row.especie }}</td>
-        <td>{{ row.descripcion }}</td>
+        <td>{{ row.descripcion }}  <br>                    
+            --Poblacion Historica-- <br>   
+                {% for rowhis in poblacion %}
+                    {%  if rowhis.flora_id == row.id  %}
+                        {{ rowhis.fecha |date:"M d, Y"}} = {{ rowhis.poblacion_historica }} <br>
+                    {%  endif %}
+                {% endfor %}
+
+
+        </td>
       </tr>
       {% endfor %}
     </tbody>
