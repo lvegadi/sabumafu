@@ -10,7 +10,7 @@ from django.template.loader import get_template
 from django.utils import timezone
 
 # Importar modelos
-from zonas.models import Alerta, Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona
+from zonas.models import Alerta, Fauna, Flora, Zona_protegida, Flora_zona, Fauna_zona, Flora_poblacion, Fauna_poblacion
 from municipios.models import Departamento, Municipio, ONG_municipio, ONG
 from zonas.forms import UserRegister
 from django.contrib import messages
