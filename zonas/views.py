@@ -156,12 +156,27 @@ def reporte_alerta(request):
 @login_required(login_url='/account/login/')
 def reporte_fauna(request):
     if request.method == 'POST':
+
        zone =  (request.POST.get('zona'))
        fauna = Fauna.objects.raw('SELECT zonas_fauna.id, zonas_fauna.nombre, zonas_fauna.especie, zonas_fauna.descripcion, zonas_fauna_zona.observaciones FROM zonas_fauna, zonas_fauna_zona where zonas_fauna.id = zonas_fauna_zona.fauna_id   and zonas_fauna_zona.zona_id =' + zone  )
        myzona = Zona_protegida.objects.get(id=zone)
+     
+       poblacion = []
+         #Por cada flora se busca la poblacion historica
+       for rowfauna in fauna:
+           zonpob = (Fauna_poblacion.objects.filter(fauna=rowfauna.id))
+           if zonpob.count() > 0:
+              for rowpob in zonpob:
+                  poblacion.append({'id':rowpob.id,'poblacion_historica':str(rowpob.poblacion_historica),'fecha':rowpob.fecha,'fauna_id':rowpob.fauna_id})
+
+      
+
+  
+  
+  
        username = request.user.username
        now = timezone.now()
-       data = {'fauna': fauna,'user':username,'fecha':now, 'myzona':myzona}
+       data = {'fauna': fauna,'poblacion':poblacion,'user':username,'fecha':now, 'myzona':myzona}
        pdf = render_to_pdf('reportes/pdf_fauna.html', data)
        return HttpResponse(pdf, content_type='application/pdf')
     #NO sirvio de esta manera
@@ -187,12 +202,24 @@ def reporte_fauna(request):
 @login_required(login_url='/account/login/')
 def reporte_flora(request):
     if request.method == 'POST':
+       poblacion = []
        zone =  (request.POST.get('zona'))
        flora = Flora.objects.raw('SELECT zonas_flora.id, zonas_flora.nombre, zonas_flora.especie, zonas_flora.descripcion, zonas_flora_zona.observaciones FROM zonas_flora, zonas_flora_zona where zonas_flora.id = zonas_flora_zona.flora_id   and zonas_flora_zona.zona_id =' + zone  )
        myzona = Zona_protegida.objects.get(id=zone)
+
+       #Por cada flora se busca la poblacion historica
+       for rowflora in flora:
+           zonpob = (Flora_poblacion.objects.filter(flora=rowflora.id))
+           if zonpob.count() > 0:
+              for rowpob in zonpob:
+                  poblacion.append({'id':rowpob.id,'poblacion_historica':str(rowpob.poblacion_historica),'fecha':rowpob.fecha,'flora_id':rowpob.flora_id})
+
+      
+
+
        username = request.user.username
        now = timezone.now()
-       data = {'flora': flora,'user':username,'fecha':now, 'myzona':myzona}
+       data = {'flora': flora,'poblacion':poblacion,'user':username,'fecha':now, 'myzona':myzona}
        pdf = render_to_pdf('reportes/pdf_flora.html', data)
        return HttpResponse(pdf, content_type='application/pdf')
     
