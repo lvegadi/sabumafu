@@ -1,34 +1,34 @@
 {% extends 'dashboard.html' %}
 {% block contenido %}
 <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-<h2>Todos los reportes</h2>
-<ul>
-    <li>
-        <a href="{%url 'pdf_alerta' %}"  class="nav-link px-2 d-block link-dark text-decoration-none text-black">
-            <span data-feather="file-text"></span>
-            Reporte de Alertas
-        </a>
-        <a href="{%url 'pdf_fauna' %}"  class="nav-link px-2 d-block link-dark text-decoration-none text-black">
-            <span data-feather="file-text"></span>
-            Reporte de Fauna
-        </a>
-        <a href="{%url 'pdf_flora' %}"  class="nav-link px-2 d-block link-dark text-decoration-none text-black">
-            <span data-feather="file-text"></span>
-            Reporte de Flora
-        </a>
-        <a href="{%url 'pdf_dpto' %}"  class="nav-link px-2 d-block link-dark text-decoration-none text-black">
-            <span data-feather="file-text"></span>
-            Reporte de Zonas Protegidas por Deptos-Municipios
-        </a>
-         <a href="{%url 'pdf_ong' %}"  class="nav-link px-2 d-block link-dark text-decoration-none text-black">
-            <span data-feather="file-text"></span>
-            Reporte de ONGs por Deptos-Municipios
-        </a>
-    </li>
+    <h2>Todos los reportes</h2>
+    <ul>
+        <li>
+            <a href="{%url 'pdf_alerta' %}" class="nav-link px-2 d-block link-dark text-decoration-none text-black">
+                <span data-feather="file-text"></span>
+                Reporte de Alertas
+            </a>
+            <a href="{%url 'pdf_fauna' %}" class="nav-link px-2 d-block link-dark text-decoration-none text-black">
+                <span data-feather="file-text"></span>
+                Reporte de Fauna
+            </a>
+            <a href="{%url 'pdf_flora' %}" class="nav-link px-2 d-block link-dark text-decoration-none text-black">
+                <span data-feather="file-text"></span>
+                Reporte de Flora
+            </a>
+            <a href="{%url 'pdf_dpto' %}" class="nav-link px-2 d-block link-dark text-decoration-none text-black">
+                <span data-feather="file-text"></span>
+                Reporte de Zonas Protegidas por Deptos-Municipios
+            </a>
+            <a href="{%url 'pdf_ong' %}" class="nav-link px-2 d-block link-dark text-decoration-none text-black">
+                <span data-feather="file-text"></span>
+                Reporte de ONGs por Deptos-Municipios
+            </a>
+        </li>
 
 
 
-</ul>    
+    </ul>
 </div>
 
 {% endblock %}

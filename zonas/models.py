@@ -1,11 +1,12 @@
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from municipios.models import Municipio
+from django.conf import settings
 from .utils import slugify_instance_title
 import pathlib
 import uuid
 # Create your models here.
-
+User = settings.AUTH_USER_MODEL
 #subir imagenes
 def image_upload_handler(instance, filename):
     fpath = pathlib.Path(filename)
@@ -40,7 +41,7 @@ class Zona_protegida(models.Model):
 
 class Alerta(models.Model):
     tipo_alerta = models.CharField(max_length=30)
-    usuario = models.DecimalField(max_digits=10, decimal_places=0)
+    usuario = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     fecha = models.DateField()
     zona = models.ForeignKey(
         Zona_protegida, on_delete=models.CASCADE)
