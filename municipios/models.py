@@ -45,4 +45,6 @@ class Entidad_municipio(models.Model):
 
 class ONG_municipio(models.Model):
     ong = models.ForeignKey(ONG, on_delete=models.CASCADE)
-    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)    
+    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
+    def __str__(self):
+        return  self.municipio.nombre + " " + self.ong.nombre;    

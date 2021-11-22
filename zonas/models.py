@@ -45,6 +45,8 @@ class Alerta(models.Model):
     fecha = models.DateField()
     zona = models.ForeignKey(
         Zona_protegida, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.id) + " - " + self.zona.nombre
 
 
 class Fauna(models.Model):
@@ -90,6 +92,8 @@ class Fauna_poblacion(models.Model):
     fecha = models.DateField()
     fauna = models.ForeignKey(
         Fauna_zona, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.poblacion_historica + " en " + self.fauna
 
 
 class Flora_poblacion(models.Model):
@@ -97,6 +101,8 @@ class Flora_poblacion(models.Model):
     fecha = models.DateField()
     flora = models.ForeignKey(
         Flora_zona, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.poblacion_historica + " en " + self.flora
 
 
 def zona_pre_save(sender, instance, *args, **kwargs):
