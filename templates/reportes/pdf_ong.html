@@ -1,35 +1,61 @@
-<style>
-    table {
+<html>
+
+<head>
+  <title>Title</title>
+  <style type="text/css">
+    body {
+      font-weight: 200;
       font-size: 12px;
-      margin-bottom: 20px;
-
-    }
-  
-    th
-    {
-      background-color: grey;
-      font-family:  rgb(240, 248, 243);
-      padding: 5px;
-      width: auto;
     }
 
-    td {
-      padding: 5px;
-    }
-  
-    p {
-      font-size: 12px;
-
+    .header {
+      font-size: 20px;
+      font-weight: 100;
+      text-align: center;
+      color: #007cae;
     }
 
+    .title {
+      font-size: 22px;
+      font-weight: 100;
+      /* text-align: right;*/
+      padding: 10px 20px 0px 20px;
+    }
+
+    .title span {
+      color: #007cae;
+    }
+
+    .details {
+      padding: 10px 20px 0px 20px;
+      text-align: left !important;
+      /*margin-left: 40%;*/
+    }
+
+    .hrItem {
+      border: none;
+      height: 1px;
+      /* Set the hr color */
+      color: #333;
+      /* old IE */
+      background-color: #fff;
+      /* Modern Browsers */
+    }
   </style>
-  <h1 align="center">Sistema de Gestion de Departamentos (ONGs ) Sabumafu</h1>
+</head>
 
-  <h2> Departamento:  {{ mydpto.nombre }} </h2>
-  {{ paso }}
-
-  <br>  <br>  
-  {% for rowm in todos_municipios %}
+<body>
+  <div class='wrapper'>
+    <div class='header'>
+      <p class='title'>Sistema de Gestion de Fauna Sabumafu</p>
+      <label>Barranquilla, Atlantico Colombia</label>
+    </div>
+    <div>
+      <div class='details'>
+        <hr class='hrItem' />
+        <p> <b>Departamento:</b> {{ mydpto.nombre }} </p>
+        <hr class='hrItem' />
+        {% for rowm in todos_municipios %}
       <h3>  Municipio:  {{ rowm.nombre }}   -    {{ rowm.codigo }}  </h3> 
     
       <table border="0.5"  cellspacing="2" cellpadding="2" >
@@ -61,10 +87,15 @@
 
   {% endfor %}
   
-   <br>
-  <p align="center">
-      Impreso por: {{user}} fecha: {{fecha}}
-  </p>
+        <hr class='hrItem' />
+        <footer>
+          <p align="center">
+            Impreso por: {{user}} fecha: {{fecha}}
+          </p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
 
-
-  
+</html>

@@ -1,62 +1,90 @@
-<style>
-    table {
-      font-size: 12px;
-      margin-bottom: 20px;
-
-    }
-  
-    th
-    {
-      background-color: grey;
-      font-family:  rgb(240, 248, 243);
-      padding: 5px;
-      width: auto;
+<html>
+<head>
+  <title>Title</title>
+  <style type="text/css">
+    body {
+      font-weight: 200;
+      font-size: 14px;
     }
 
-    td {
-      padding: 5px;
-    }
-  
-    p {
-      font-size: 12px;
-
+    .header {
+      font-size: 20px;
+      font-weight: 100;
+      text-align: center;
+      color: #007cae;
     }
 
+    .title {
+      font-size: 22px;
+      font-weight: 100;
+      /* text-align: right;*/
+      padding: 10px 20px 0px 20px;
+    }
+
+    .title span {
+      color: #007cae;
+    }
+
+    .details {
+      padding: 10px 20px 0px 20px;
+      text-align: left !important;
+      /*margin-left: 40%;*/
+    }
+
+    .hrItem {
+      border: none;
+      height: 1px;
+      /* Set the hr color */
+      color: #333;
+      /* old IE */
+      background-color: #fff;
+      /* Modern Browsers */
+    }
   </style>
-  <h1 align="center">Sistema de Gestion de Alertas Sabumafu</h1>
+</head>
 
-  <h2> Zona Protegida: {{ myzona.nombre }} </h2>
-  <p> <b>Latitud: </b> {{ myzona.latitud }}  </p>
-  <p> <b>Longitud: </b>{{ myzona.longitud }} </p>
-  <br>
+<body>
+  <div class='wrapper'>
+    <div class='header'>
+      <p class='title'>Sistema de Gestion de Alertas Sabumafu</p>
+      <label>Barranquilla, Atlantico Colombia</label>
+    </div>
+    <div>
+      <div class='details'>
+        <hr class='hrItem' />
+        <p> <b>Zona Protegida: </b>{{ myzona.nombre }} </p>
+        <p> <b>Latitud: </b>{{ myzona.latitud }} </p>
+        <p> <b>Longitud: </b>{{ myzona.longitud }} </p>
+        <hr class='hrItem' />
+        <table border="0.5" cellspacing="2" cellpadding="2">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Tipo Alerta</th>
+              <th>Usuario</th>
+              <th>Fecha</th>
 
- 
- 
-  <table border="0.5"  cellspacing="2" cellpadding="2" >
-    <thead>
-      <tr  >
-        <th>Id</th>
-        <th>Tipo Alerta</th>
-        <th>Usuario</th>
-        <th>Fecha</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in alerta %}
-      <tr>
-        <td>{{ row.id }}</td>
-        <td>{{ row.tipo_alerta }}</td>
-        <td>{{ row.username }}</td>
-        <td>{{ row.fecha |date:"M d, Y" }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <br>
-  <p align="center">
-      Impreso por: {{user}} fecha: {{fecha}}
-  </p>
-
-
-  
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in alerta %}
+            <tr>
+              <td>{{ row.id }}</td>
+              <td>{{ row.tipo_alerta }}</td>
+              <td>{{ row.usuario.username }}</td>
+              <td>{{ row.fecha |date:"M d, Y" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <hr class='hrItem' />
+        <footer>
+          <p align="center">
+            Impreso por: {{user}} fecha: {{fecha}}
+          </p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

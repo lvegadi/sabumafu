@@ -221,9 +221,16 @@ def render_to_pdf(template_src, context_dict={}):
 def reporte_alerta(request):
     if request.method == 'POST':
         zone = (request.POST.get('zona'))
-        alerta = Alerta.objects.raw('select zonas_alerta.id, zonas_alerta.tipo_alerta, zonas_alerta.usuario_id, zonas_alerta.fecha, zonas_zona_protegida.nombre, auth_user.username from zonas_alerta inner join zonas_zona_protegida on zonas_alerta.zona_id=zonas_zona_protegida.id inner join auth_user on auth_user.id=zonas_alerta.usuario_id where zonas_zona_protegida.id=' + zone)
-        if request.POST.get('fecha_inicio'):
-            print('creado')
+        if request.POST.get('fecha_inicio') :
+            inicio = request.POST.get('fecha_inicio')
+        else:
+            inicio = '2001-01-01'
+        if request.POST.get('fecha_fin') :
+            fin = request.POST.get('fecha_fin')
+        else:
+            fin = '2999-12-31'
+        print(inicio, "AAAAA ", fin)
+        alerta = Alerta.objects.select_related('usuario','zona').filter(zona_id = zone, fecha__range=[inicio, fin])
         myzona = Zona_protegida.objects.get(id=zone)
         username = request.user.username
         now = timezone.now()
@@ -232,13 +239,11 @@ def reporte_alerta(request):
         pdf = render_to_pdf('reportes/pdf_alerta.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
-    lista = Zona_protegida.objects.all()
+    lista = Zona_protegida.objects.all().order_by('nombre')
     data = {'title': 'Reporte de filtros', 'lista': lista}
     return render(request, 'reportes/reporte1.html', data)
 
 # Reporte 2
-
-
 @login_required(login_url='/account/login/')
 def reporte_fauna(request):
     if request.method == 'POST':
@@ -263,7 +268,7 @@ def reporte_fauna(request):
         pdf = render_to_pdf('reportes/pdf_fauna.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
-    lista = Zona_protegida.objects.all()
+    lista = Zona_protegida.objects.all().order_by('nombre')
     data = {'title': 'Reporte de filtros', 'lista': lista}
     return render(request, 'reportes/reporte2.html', data)
 
@@ -295,7 +300,7 @@ def reporte_flora(request):
         pdf = render_to_pdf('reportes/pdf_flora.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
-    lista = Zona_protegida.objects.all()
+    lista = Zona_protegida.objects.all().order_by('nombre')
     data = {'title': 'Reporte de filtros', 'lista': lista}
     return render(request, 'reportes/reporte3.html', data)
 
@@ -331,7 +336,7 @@ def reporte_dpto(request):
         pdf = render_to_pdf('reportes/pdf_dpto.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
-    lista = Departamento.objects.all()
+    lista = Departamento.objects.all().order_by('nombre')
     data = {'title': 'Reporte de filtros', 'lista': lista}
     return render(request, 'reportes/reporte4.html', data)
 
@@ -368,6 +373,6 @@ def reporte_ong(request):
         pdf = render_to_pdf('reportes/pdf_ong.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
-    lista = Departamento.objects.all()
+    lista = Departamento.objects.all().order_by('nombre')
     data = {'title': 'Reporte de filtros', 'lista': lista}
     return render(request, 'reportes/reporte5.html', data)

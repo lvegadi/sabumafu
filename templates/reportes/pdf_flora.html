@@ -1,86 +1,114 @@
-<style>
-    table {
-      font-size: 12px;
-      margin-bottom: 20px;
+<html>
 
-    }
-  
-    th
-    {
-      background-color: grey;
-      font-family:  rgb(240, 248, 243);
-      padding: 5px;
-      width: auto;
+<head>
+  <title>Title</title>
+  <style type="text/css">
+    body {
+      font-weight: 200;
+      font-size: 14px;
     }
 
-    td {
-      padding: 5px;
-    }
-  
-    p {
-      font-size: 12px;
-
+    .header {
+      font-size: 20px;
+      font-weight: 100;
+      text-align: center;
+      color: #007cae;
     }
 
+    .title {
+      font-size: 22px;
+      font-weight: 100;
+      /* text-align: right;*/
+      padding: 10px 20px 0px 20px;
+    }
+
+    .title span {
+      color: #007cae;
+    }
+
+    .details {
+      padding: 10px 20px 0px 20px;
+      text-align: left !important;
+      /*margin-left: 40%;*/
+    }
+
+    .hrItem {
+      border: none;
+      height: 1px;
+      /* Set the hr color */
+      color: #333;
+      /* old IE */
+      background-color: #fff;
+      /* Modern Browsers */
+    }
   </style>
-  <h1 align="center">Sistema de Gestion de Flora Sabumafu</h1>
+</head>
 
-  <h2> Zona Protegida: {{ myzona.nombre }} </h2>
-  <p> <b>Latitud: </b> {{ myzona.latitud }}  </p>
-  <p> <b>Longitud: </b>{{ myzona.longitud }} </p>
-  <br>
+<body>
+  <div class='wrapper'>
+    <div class='header'>
+      <p class='title'>Sistema de Gestion de Flora Sabumafu</p>
+      <label>Barranquilla, Atlantico Colombia</label>
+    </div>
+    <div>
+      <div class='details'>
+        <hr class='hrItem' />
+        <p> <b>Zona Protegida: </b>{{ myzona.nombre }} </p>
+        <p> <b>Latitud: </b>{{ myzona.latitud }} </p>
+        <p> <b>Longitud: </b>{{ myzona.longitud }} </p>
+        <hr class='hrItem' />
+        <table border="0.5"  cellspacing="2" cellpadding="2" >
+          <thead>
+            <tr  >
+              <th>Id flora</th>
+              <th>Nombre</th>
+              <th>Especie</th>
+      
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in flora %}
+            <tr>
+              <td>{{ row.id }}</td>
+              <td>{{ row.nombre }}</td>
+              <td>{{ row.especie }}</td>                  
+           
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      
+        {% if  poblacion %}
+        <h2> Población Historica </h2>
+        <table border="0.5"  cellspacing="2" cellpadding="2" >
+          <thead>
+            <tr  >
+              <th>Flora</th>
+              <th>Fecha</th>
+              <th>Población</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rowhis in poblacion %}
+            <tr>
+              <td>{{ rowhis.flora_id }}</td>
+              <td>{{ rowhis.fecha |date:"M d, Y"}}</td>
+              <td>{{ rowhis.poblacion_historica }} </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif   %}
+      
+        <hr class='hrItem' />
+        <footer>
+          <p align="center">
+            Impreso por: {{user}} fecha: {{fecha}}
+          </p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
 
- 
- 
-  <table border="0.5"  cellspacing="2" cellpadding="2" >
-    <thead>
-      <tr  >
-        <th>Id Flora</th>
-        <th>Nombre</th>
-        <th>Especie</th>
-        <th>Descripcion</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in flora %}
-      <tr>
-        <td>{{ row.id }}</td>
-        <td>{{ row.nombre }}</td>
-        <td>{{ row.especie }}</td>
-        <td>{{ row.descripcion }}  </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  {% if  poblacion %}
-  <br>
-  <h2> Población Historica </h2>
-  <table border="0.5"  cellspacing="2" cellpadding="2" >
-    <thead>
-      <tr  >
-        <th>Zona Id</th>
-        <th>Fecha</th>
-        <th>Población</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for rowhis in poblacion %}
-      <tr>
-        <td>{{ rowhis.flora_id }}</td>
-        <td>{{ rowhis.fecha |date:"M d, Y"}}</td>
-        <td>{{ rowhis.poblacion_historica }} </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endif   %}
-
-  <br>
-  <p align="center">
-      Impreso por: {{user}} fecha: {{fecha}}
-  </p>
-
-
-  
+</html>
