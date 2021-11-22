@@ -17,7 +17,7 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.urls import path
 from zonas.views import index, zona, todazona, registro, flora, todaflora, fauna, todafauna, alerta, dashboard,reportes,reporte_alerta, reporte_fauna, reporte_flora,  reporte_dpto, reporte_ong, configure, detail_flora, detail_fauna
-from municipios.views import index_municipio
+from municipios.views import index_municipio, ongs, entidades
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -39,6 +39,9 @@ urlpatterns = [
 
     #-- MUNICIPIOS --#
     path('municipio/', index_municipio, name="index_municipio"),
+    path('ong/', ongs, name="ongs"),
+    path('entidades/', entidades, name="entidades"),
+
     #-- DASHBOARD --#
     path('dashboard/', dashboard, name="dashboard"),
     path('dashboard/alerta/', alerta, name="alert"),

@@ -1,0 +1,47 @@
+{% extends 'home.html' %}
+
+{% load static %}
+
+{% block header%}
+
+{% endblock %}
+
+{% block contenido %}
+
+<main>
+    <section class="pt-5 text-center container">
+        <div class="row">
+            <div class="pt-5 col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light"><strong>ONGs</strong></h1>
+                <p class="lead text-muted">Se tienen registradas {{count}} ONG</p>
+            </div>
+        </div>
+    </section>
+    <div class="album py-5">
+        <!-- Contenedor -->
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for row in data %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        {% if row.image %}
+                        <img class="card-img-top" src='{{row.image.url}}' alt="{{row.nombre}}" width='100%' height='250px'>
+                        {% endif %}
+                        <div class="card-body" style="height: 15rem;">
+                            <h3 class="card-text">{{row.nombre}}</h3>
+                            <p class="card-text">Categoria: {{row.tipo}}</p>
+                            <p class="card-text">Telefono: {{row.telefono}}</p>
+                            <p class="card-text">Correo: {{row.correo}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Contenedor -->
+    </div>
+</main>
+
+{% endblock %}

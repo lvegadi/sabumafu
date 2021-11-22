@@ -174,7 +174,9 @@ def configure(request):
             actual_user.save()
             messages.success(request, 'Username actualizado satisfactoriamente.')
         if request.POST.get('conf_pss') != "" and request.POST.get('conf_pss1') != "":
-            if request.POST.get('conf_pass') == request.POST.get('conf_pass1'): 
+            print(request.POST.get('conf_pass'))
+            print(request.POST.get('conf_pass1'))
+            if request.POST.get('conf_pass')==(request.POST.get('conf_pass1')): 
                 actual_user.set_password(request.POST.get('conf_pss'))
                 actual_user.save()
                 messages.success(request, 'Contraseña actualizada satisfactoriamente.')
