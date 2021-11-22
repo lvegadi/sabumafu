@@ -30,7 +30,9 @@ def index(request):
     return render(request, 'zonas/index.html', data)
 # sirve
 
-
+def about(request):
+    data = {'title': 'Sabumafu'}
+    return render(request, 'zonas/about.html', data)
 def registro(request):
     if request.method == 'POST':
         form = UserRegister(request.POST)
