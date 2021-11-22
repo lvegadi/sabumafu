@@ -219,7 +219,7 @@ def render_to_pdf(template_src, context_dict={}):
 def reporte_alerta(request):
     if request.method == 'POST':
         zone = (request.POST.get('zona'))
-        alerta = Alerta.objects.raw('select zonas_alerta.id, zonas_alerta.tipo_alerta, zonas_alerta.usuario, zonas_alerta.fecha, zonas_zona_protegida.nombre, auth_user.username from zonas_alerta inner join zonas_zona_protegida on zonas_alerta.zona_id=zonas_zona_protegida.id inner join auth_user on auth_user.id=zonas_alerta.usuario where zonas_zona_protegida.id=' + zone)
+        alerta = Alerta.objects.raw('select zonas_alerta.id, zonas_alerta.tipo_alerta, zonas_alerta.usuario_id, zonas_alerta.fecha, zonas_zona_protegida.nombre, auth_user.username from zonas_alerta inner join zonas_zona_protegida on zonas_alerta.zona_id=zonas_zona_protegida.id inner join auth_user on auth_user.id=zonas_alerta.usuario_id where zonas_zona_protegida.id=' + zone)
         if request.POST.get('fecha_inicio'):
             print('creado')
         myzona = Zona_protegida.objects.get(id=zone)
