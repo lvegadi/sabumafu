@@ -110,6 +110,30 @@ def todafauna(request):
     data = {'title': 'Fauna', 'count': count, 'fauna': lista}
     return render(request, 'fauna/index.html', data)
 
+
+def detail_flora(request,id=None):
+    if id is not None:
+        try:
+            f = Flora.objects.get(id=id)
+            f_zona = Flora_zona.objects.get(flora_id=f.id)
+        except Flora.DoesNotExist:
+            raise Http404
+        except:
+            raise Http404
+    data = {'flora': f, 'flora_z': f_zona}
+    return render(request, 'flora/detalle.html', data)
+
+def detail_fauna(request,id=None):
+    if id is not None:
+        try:
+            f = Fauna.objects.get(id=id)
+            f_zona = Fauna_zona.objects.get(fauna_id=f.id)
+        except Fauna.DoesNotExist:
+            raise Http404
+        except:
+            raise Http404
+    data = {'fauna': f, 'fauna_z': f_zona}
+    return render(request, 'fauna/detalle.html', data)
 # Dashboard
 
 
@@ -131,19 +155,39 @@ def alerta(request):
 
 @login_required(login_url='/account/login/')  # sirve
 def configure(request):
-    zona = Zona_protegida.objects.all()
-    now = datetime.now()
-    date = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
     if request.method == 'POST':
-        alert_type = request.POST.get('slc_lrt_tp')
-        user = request.POST.get('slc_user')
-        user1 = User.objects.get(id=user)
-        zone = request.POST.get('slc_zone')
-        zone_id = Zona_protegida.objects.get(slug=zone)
-        a = Alerta(tipo_alerta=alert_type, usuario=user1, fecha=date, zona=zone_id)
-        a.save()
-    data = {'title': 'Alerta', 'zona': zona, 'date': date}
-    return render(request, 'alerta/index.html', data)
+        actual_user = User.objects.get(id = request.POST.get('conf_id'))
+        if request.POST.get('conf_email') != "":
+            actual_user.email = request.POST.get('conf_email')
+            actual_user.save()
+            messages.success(request, 'Email actualizado satisfactoriamente.')
+        if request.POST.get('conf_name') != "":
+            actual_user.first_name = request.POST.get('conf_name')
+            actual_user.save()
+            messages.success(request, 'Nombre actualizado satisfactoriamente.')
+        if request.POST.get('conf_lst_name') != "":
+            actual_user.last_name = request.POST.get('conf_lst_name')
+            actual_user.save()
+            messages.success(request, 'Apellido actualizado satisfactoriamente.')
+        if request.POST.get('conf_usernm') != "":
+            actual_user.username = request.POST.get('conf_usernm')
+            actual_user.save()
+            messages.success(request, 'Username actualizado satisfactoriamente.')
+        if request.POST.get('conf_pss') != "" and request.POST.get('conf_pss1') != "":
+            if request.POST.get('conf_pass') == request.POST.get('conf_pass1'): 
+                actual_user.set_password(request.POST.get('conf_pss'))
+                actual_user.save()
+                messages.success(request, 'Contraseña actualizada satisfactoriamente.')
+            else:
+                messages.success(request, 'Contraseña NO actualizada.')
+
+        #user = request.POST.get('slc_user')
+        #user1 = User.objects.get(id=user)
+        #zone = request.POST.get('slc_zone')
+        #zone_id = Zona_protegida.objects.get(slug=zone)
+        #a = Alerta()
+    data = {'title': 'Alerta'}
+    return render(request, 'configuracion/index.html', data)
 
 @login_required(login_url='/account/login/')
 def dashboard(request):

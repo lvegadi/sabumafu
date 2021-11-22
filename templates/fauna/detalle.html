@@ -1,0 +1,50 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block header%}
+{% endblock %}
+
+{% block contenido %}
+
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+            <h1 class="display-4 fst-italic">{{fauna.nombre}}</h1>
+            <h3 class="display-10 fst-italic">{{fauna.especie}}</h3>
+            <p class="lead my-3" style="transform: rotate(0);" id='descripcion'>{{fauna.descripcion}}</p>
+        </div>
+    </div>
+    <!-- fauna y fauna cards -->
+    <!-- Contenido -->
+    <div class="row g-5">
+        <div class="col-md-8">
+            <h3 class="pb-4 mb-4 fst-italic border-bottom">
+                {{fauna.nombre}}
+            </h3>
+            <div style="max-width:850px;">
+                <img src='{{fauna.image.url}}' alt='{{fauna.nombre}}' width='100%' height='auto'>
+            </div>
+
+            <article class="blog-post">
+                <h2 class="blog-post-title">Generalidades</h2>
+                <P>{{fauna_z.observaciones | linebreaks}}</p>
+                <hr>
+
+            </article>
+        </div>
+
+        <div class="col-md-4">
+            <div class="position-sticky" style="top: 2rem;">
+                <br><br>
+
+                <div class="p-4">
+                    <h4 class="fst-italic">Enlaces externos</h4>
+                    <ol class="list-unstyled">
+                        <li><a href="https://github.com/lvegadi/sabumafu" target="_blank">GitHub</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'dashboard.html'%}
+{% load static %}
+{% block contenido %}
+{% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            <h4>{{ message }}</h4> 
+        {% endfor %}
+    </div>
+    {% endif %}
+<div class="text-center">
+    <form id="conf_form" method="post" name="conf_form">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal">Configuracion de usuario</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col form-group py-2">
+                <label for="conf_name">Nombre</label>
+                <input type="text" class="form-control" id="conf_name" name="conf_name"
+                    placeholder="{{user.first_name}}" value="">
+            </div>
+            <div class="col form-group py-2">
+                <label for="conf_lst_name">Apellido</label>
+                <input type="text" class="form-control" id="conf_lst_name" name="conf_lst_name"
+                    placeholder="{{user.last_name}}" value="">
+            </div>
+            <div class="col form-group py-2">
+                <label for="conf_email">Correo</label>
+                <input type="email" class="form-control" id="conf_email" name="conf_email" placeholder="{{user.email}}" value="">
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col form-group py-2">
+                <label for="conf_usernm">Username</label>
+                <input type="text" class="form-control" id="conf_usernm" name="conf_usernm"
+                    placeholder="{{user.username}}" value="">
+            </div>
+            <div class="col form-group py-2">
+                <label for="conf_pss">Contraseña</label>
+                <input type="password" class="form-control" id="conf_pss" name="conf_pss" value="">
+            </div>
+            <div class=" col form-group py-2">
+                <label for="conf_pss">Verificar contraseña</label>
+                <input type="password" class="form-control" id="conf_pss1" name="conf_pss1" value="">
+            </div>
+            <div class="form-floating">
+                <input type="hidden" class="form-control" id="conf_id" name="conf_id" value="{{user.id}}">
+            </div>
+        </div>
+        <button class="btn btn-outline-success btn-lg w-50" type="submit">Actualizar</button>
+        <button class="btn btn-outline-danger btn-lg w-50 mt-5" type="submit">Borrar usuario</button>
+    </form>
+    <br>
+
+</div>
+{% endblock %}

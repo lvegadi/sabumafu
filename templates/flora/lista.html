@@ -25,13 +25,18 @@
                 <div class="col">
                     <div class="card shadow-sm">
                         {% if row.flora.image %}
-                        <img class="card-img-top" src='{{row.flora.image.url}}' alt="{{row.flora.nombre}}" width='100%' height='250px'>
+                        <img class="card-img-top" src='{{row.flora.image.url}}' alt="{{row.flora.nombre}}" width='100%'
+                            height='250px'>
                         {% endif %}
                         <div class="card-body" style="height: 12rem;">
-                            <h3 class="card-text">{{row.nombre}}</h3>
+                            <h3 class="card-text">{{row.flora.nombre}}</h3>
                             <p class="card-text acortar" id="descripcion">{{row.flora.descripcion}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                             </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="button" onclick="window.location.href='/flora/detalle/{{row.flora.id}}'"
+                                class="btn btn-sm btn-outline-secondary ">Detalles</button>
                         </div>
                     </div>
                 </div>
